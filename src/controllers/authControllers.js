@@ -22,9 +22,9 @@ export const register = async (req, res) => {
     const hashed_password = await bcrypt.hash(password, 5);
 
     // save user to db
-    // const user = await prisma.user.create({
-    //   data: { name, email, password: hashed_password },
-    // });
+    const user = await prisma.user.create({
+      data: { name, email, password: hashed_password },
+    });
 
     // send otp
     messenger.sendMail(

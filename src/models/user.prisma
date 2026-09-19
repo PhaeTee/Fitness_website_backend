@@ -14,3 +14,11 @@ model Profile {
     userId String @unique
     user User @relation(fields: [userId], references: [id])
 }
+
+model Plan {
+    id String @id @default(uuid())
+    name String
+    price Int
+    duration Int
+    benefits String
+}

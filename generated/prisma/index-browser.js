@@ -120,6 +120,23 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  duration: 'duration',
+  benefits: 'benefits'
+};
+
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -135,14 +152,6 @@ exports.Prisma.ProfileScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.PlanScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  price: 'price',
-  duration: 'duration',
-  benefits: 'benefits'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -155,9 +164,10 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  Plan: 'Plan',
+  Subscription: 'Subscription',
   User: 'User',
-  Profile: 'Profile',
-  Plan: 'Plan'
+  Profile: 'Profile'
 };
 
 /**

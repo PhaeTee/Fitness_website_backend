@@ -4,6 +4,7 @@ import { authRoutes } from "./routes/authRoutes.js";
 import { logger } from "./middlewares/logger.js";
 import { auth_middleware } from "./middlewares/authMiddleware.js";
 import { planRoutes } from "./routes/planRoutes.js";
+import { subscriptionRoutes } from "./routes/subscriptionRoutes.js";
 
 export const app = express();
 
@@ -16,3 +17,4 @@ app.use("/users", userRoute);
 app.use("/auth", authRoutes);
 
 app.use("/plans", planRoutes);
+app.use("/subscriptions", subscriptionRoutes);

@@ -4,6 +4,7 @@ model User {
     password String 
     name String
     profile Profile?
+    subscriptions Subscription[]
 }
 
 model Profile {

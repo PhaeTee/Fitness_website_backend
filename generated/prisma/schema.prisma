@@ -1,3 +1,12 @@
+model Plan {
+  id            String         @id @default(uuid())
+  name          String
+  price         Int
+  duration      Int
+  benefits      String[]
+  subscriptions Subscription[]
+}
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -12,12 +21,25 @@ datasource db {
   provider = "postgresql"
 }
 
+model Subscription {
+  id        String   @id @default(uuid())
+  userId    String
+  planId    String
+  startDate DateTime
+  endDate   DateTime
+  status    String
+
+  user User @relation(fields: [userId], references: [id])
+  plan Plan @relation(fields: [planId], references: [id])
+}
+
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  password String
-  name     String
-  profile  Profile?
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String
+  profile       Profile?
+  subscriptions Subscription[]
 }
 
 model Profile {
@@ -27,12 +49,4 @@ model Profile {
   state        String
   userId       String @unique
   user         User   @relation(fields: [userId], references: [id])
-}
-
-model Plan {
-  id       String   @id @default(uuid())
-  name     String
-  price    Int
-  duration Int
-  benefits String[]
 }

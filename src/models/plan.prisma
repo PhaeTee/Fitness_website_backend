@@ -4,4 +4,5 @@ model Plan {
     price Int
     duration Int
     benefits String[]
+    subscriptions Subscription[]
 }

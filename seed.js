@@ -1,10 +1,10 @@
-import { prisma } from "../src/config/db.js";
+import { prisma } from "./src/config/db.js";
 
 const plans = [
   {
-    id: 1,
     name: "Basic",
     price: 10000,
+    duration: 30,
     benefits: [
       "Gym access",
       "Access to standard gym equipment",
@@ -15,9 +15,9 @@ const plans = [
   },
 
   {
-    id: 2,
     name: "Standard",
     price: 20000,
+    duration: 30,
     benefits: [
       "Everything in Basic",
       "Group fitness classes",
@@ -28,9 +28,9 @@ const plans = [
   },
 
   {
-    id: 3,
     name: "Premium",
     price: 30000,
+    duration: 30,
     benefits: [
       "Everything in Standard",
       "Personal training sessions",
@@ -57,21 +57,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-  async function main() {
-  for (const plan of plans) {
-    await prisma.plan.upsert({
-      where: { name: plan.name }, // works because name is @unique
-      update: plan,
-      create: plan,
-    });
-  }
-  console.log("Plans seeded");
-}
-
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(() => prisma.$disconnect());

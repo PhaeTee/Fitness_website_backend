@@ -5,6 +5,7 @@ model Plan {
   duration      Int
   benefits      String[]
   subscriptions Subscription[]
+  rank          Int
 }
 
 // This is your Prisma schema file,

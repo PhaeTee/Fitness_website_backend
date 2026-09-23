@@ -5,4 +5,5 @@ model Plan {
     duration Int
     benefits String[]
     subscriptions Subscription[]
+    rank Int
 }

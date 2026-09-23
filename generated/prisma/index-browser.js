@@ -125,7 +125,8 @@ exports.Prisma.PlanScalarFieldEnum = {
   name: 'name',
   price: 'price',
   duration: 'duration',
-  benefits: 'benefits'
+  benefits: 'benefits',
+  rank: 'rank'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {

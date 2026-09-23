@@ -2,6 +2,7 @@ import { prisma } from "./src/config/db.js";
 
 const plans = [
   {
+    rank: 1,
     name: "Basic",
     price: 10000,
     duration: 30,
@@ -15,6 +16,7 @@ const plans = [
   },
 
   {
+    rank: 2,
     name: "Standard",
     price: 20000,
     duration: 30,
@@ -28,6 +30,7 @@ const plans = [
   },
 
   {
+    rank: 3,
     name: "Premium",
     price: 30000,
     duration: 30,

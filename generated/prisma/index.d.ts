@@ -1243,11 +1243,13 @@ export namespace Prisma {
   export type PlanAvgAggregateOutputType = {
     price: number | null
     duration: number | null
+    rank: number | null
   }
 
   export type PlanSumAggregateOutputType = {
     price: number | null
     duration: number | null
+    rank: number | null
   }
 
   export type PlanMinAggregateOutputType = {
@@ -1255,6 +1257,7 @@ export namespace Prisma {
     name: string | null
     price: number | null
     duration: number | null
+    rank: number | null
   }
 
   export type PlanMaxAggregateOutputType = {
@@ -1262,6 +1265,7 @@ export namespace Prisma {
     name: string | null
     price: number | null
     duration: number | null
+    rank: number | null
   }
 
   export type PlanCountAggregateOutputType = {
@@ -1270,6 +1274,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits: number
+    rank: number
     _all: number
   }
 
@@ -1277,11 +1282,13 @@ export namespace Prisma {
   export type PlanAvgAggregateInputType = {
     price?: true
     duration?: true
+    rank?: true
   }
 
   export type PlanSumAggregateInputType = {
     price?: true
     duration?: true
+    rank?: true
   }
 
   export type PlanMinAggregateInputType = {
@@ -1289,6 +1296,7 @@ export namespace Prisma {
     name?: true
     price?: true
     duration?: true
+    rank?: true
   }
 
   export type PlanMaxAggregateInputType = {
@@ -1296,6 +1304,7 @@ export namespace Prisma {
     name?: true
     price?: true
     duration?: true
+    rank?: true
   }
 
   export type PlanCountAggregateInputType = {
@@ -1304,6 +1313,7 @@ export namespace Prisma {
     price?: true
     duration?: true
     benefits?: true
+    rank?: true
     _all?: true
   }
 
@@ -1399,6 +1409,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits: string[]
+    rank: number
     _count: PlanCountAggregateOutputType | null
     _avg: PlanAvgAggregateOutputType | null
     _sum: PlanSumAggregateOutputType | null
@@ -1426,6 +1437,7 @@ export namespace Prisma {
     price?: boolean
     duration?: boolean
     benefits?: boolean
+    rank?: boolean
     subscriptions?: boolean | Plan$subscriptionsArgs<ExtArgs>
     _count?: boolean | PlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["plan"]>
@@ -1436,6 +1448,7 @@ export namespace Prisma {
     price?: boolean
     duration?: boolean
     benefits?: boolean
+    rank?: boolean
   }, ExtArgs["result"]["plan"]>
 
   export type PlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1444,6 +1457,7 @@ export namespace Prisma {
     price?: boolean
     duration?: boolean
     benefits?: boolean
+    rank?: boolean
   }, ExtArgs["result"]["plan"]>
 
   export type PlanSelectScalar = {
@@ -1452,9 +1466,10 @@ export namespace Prisma {
     price?: boolean
     duration?: boolean
     benefits?: boolean
+    rank?: boolean
   }
 
-  export type PlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "duration" | "benefits", ExtArgs["result"]["plan"]>
+  export type PlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "duration" | "benefits" | "rank", ExtArgs["result"]["plan"]>
   export type PlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscriptions?: boolean | Plan$subscriptionsArgs<ExtArgs>
     _count?: boolean | PlanCountOutputTypeDefaultArgs<ExtArgs>
@@ -1473,6 +1488,7 @@ export namespace Prisma {
       price: number
       duration: number
       benefits: string[]
+      rank: number
     }, ExtArgs["result"]["plan"]>
     composites: {}
   }
@@ -1902,6 +1918,7 @@ export namespace Prisma {
     readonly price: FieldRef<"Plan", 'Int'>
     readonly duration: FieldRef<"Plan", 'Int'>
     readonly benefits: FieldRef<"Plan", 'String[]'>
+    readonly rank: FieldRef<"Plan", 'Int'>
   }
     
 
@@ -5588,7 +5605,8 @@ export namespace Prisma {
     name: 'name',
     price: 'price',
     duration: 'duration',
-    benefits: 'benefits'
+    benefits: 'benefits',
+    rank: 'rank'
   };
 
   export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
@@ -5716,6 +5734,7 @@ export namespace Prisma {
     price?: IntFilter<"Plan"> | number
     duration?: IntFilter<"Plan"> | number
     benefits?: StringNullableListFilter<"Plan">
+    rank?: IntFilter<"Plan"> | number
     subscriptions?: SubscriptionListRelationFilter
   }
 
@@ -5725,6 +5744,7 @@ export namespace Prisma {
     price?: SortOrder
     duration?: SortOrder
     benefits?: SortOrder
+    rank?: SortOrder
     subscriptions?: SubscriptionOrderByRelationAggregateInput
   }
 
@@ -5737,6 +5757,7 @@ export namespace Prisma {
     price?: IntFilter<"Plan"> | number
     duration?: IntFilter<"Plan"> | number
     benefits?: StringNullableListFilter<"Plan">
+    rank?: IntFilter<"Plan"> | number
     subscriptions?: SubscriptionListRelationFilter
   }, "id">
 
@@ -5746,6 +5767,7 @@ export namespace Prisma {
     price?: SortOrder
     duration?: SortOrder
     benefits?: SortOrder
+    rank?: SortOrder
     _count?: PlanCountOrderByAggregateInput
     _avg?: PlanAvgOrderByAggregateInput
     _max?: PlanMaxOrderByAggregateInput
@@ -5762,6 +5784,7 @@ export namespace Prisma {
     price?: IntWithAggregatesFilter<"Plan"> | number
     duration?: IntWithAggregatesFilter<"Plan"> | number
     benefits?: StringNullableListFilter<"Plan">
+    rank?: IntWithAggregatesFilter<"Plan"> | number
   }
 
   export type SubscriptionWhereInput = {
@@ -5941,6 +5964,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits?: PlanCreatebenefitsInput | string[]
+    rank: number
     subscriptions?: SubscriptionCreateNestedManyWithoutPlanInput
   }
 
@@ -5950,6 +5974,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits?: PlanCreatebenefitsInput | string[]
+    rank: number
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutPlanInput
   }
 
@@ -5959,6 +5984,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
     subscriptions?: SubscriptionUpdateManyWithoutPlanNestedInput
   }
 
@@ -5968,6 +5994,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutPlanNestedInput
   }
 
@@ -5977,6 +6004,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits?: PlanCreatebenefitsInput | string[]
+    rank: number
   }
 
   export type PlanUpdateManyMutationInput = {
@@ -5985,6 +6013,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlanUncheckedUpdateManyInput = {
@@ -5993,6 +6022,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
   }
 
   export type SubscriptionCreateInput = {
@@ -6218,11 +6248,13 @@ export namespace Prisma {
     price?: SortOrder
     duration?: SortOrder
     benefits?: SortOrder
+    rank?: SortOrder
   }
 
   export type PlanAvgOrderByAggregateInput = {
     price?: SortOrder
     duration?: SortOrder
+    rank?: SortOrder
   }
 
   export type PlanMaxOrderByAggregateInput = {
@@ -6230,6 +6262,7 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    rank?: SortOrder
   }
 
   export type PlanMinOrderByAggregateInput = {
@@ -6237,11 +6270,13 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    rank?: SortOrder
   }
 
   export type PlanSumOrderByAggregateInput = {
     price?: SortOrder
     duration?: SortOrder
+    rank?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -6748,6 +6783,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits?: PlanCreatebenefitsInput | string[]
+    rank: number
   }
 
   export type PlanUncheckedCreateWithoutSubscriptionsInput = {
@@ -6756,6 +6792,7 @@ export namespace Prisma {
     price: number
     duration: number
     benefits?: PlanCreatebenefitsInput | string[]
+    rank: number
   }
 
   export type PlanCreateOrConnectWithoutSubscriptionsInput = {
@@ -6807,6 +6844,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
@@ -6815,6 +6853,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
     benefits?: PlanUpdatebenefitsInput | string[]
+    rank?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProfileCreateWithoutUserInput = {

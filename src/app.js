@@ -1,4 +1,7 @@
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger.js";
+import cors from "cors";
 import { userRoute } from "./routes/userRoutes.js";
 import { authRoutes } from "./routes/authRoutes.js";
 import { logger } from "./middlewares/logger.js";
@@ -29,6 +32,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(logger);
 // app.use(auth_middleware);
 app.use("/users", userRoute);
@@ -36,3 +41,5 @@ app.use("/auth", authRoutes);
 
 app.use("/plans", planRoutes);
 app.use("/subscriptions", subscriptionRoutes);
+
+app.use("/payments", paymentRoutes);

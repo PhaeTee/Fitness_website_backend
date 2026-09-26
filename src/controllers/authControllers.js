@@ -15,8 +15,8 @@ export const register = async (req, res) => {
 
     // check if user already exist
     const exist_user = await prisma.user.findUnique({ where: { email } });
-    // if (exist_user)
-    //   return res.status(400).json({ message: "user already exist" });
+    if (exist_user)
+      return res.status(400).json({ message: "user already exist" });
 
     // hash the password
     const hashed_password = await bcrypt.hash(password, 5);
@@ -75,7 +75,13 @@ export const login = async (req, res) => {
 
     // return (jwt token)
     const token = await generate_jwt({ user_id: exist_user.id });
-    return res.status(200).json({ token });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax"
+    })
+    return res.status(200).json({ token, message:"Login successful" });
   } catch (error) {
     console.log("[/login] error: ", error.message);
     return res.sendStatus(500);

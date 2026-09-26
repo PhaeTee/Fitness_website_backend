@@ -5,6 +5,7 @@ model User {
     name String
     profile Profile?
     subscriptions Subscription[]
+    payments Payment[]
 }
 
 model Profile {

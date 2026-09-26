@@ -120,6 +120,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  amount: 'amount',
+  action: 'action',
+  status: 'status',
+  reference: 'reference',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.PlanScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -165,6 +176,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  Payment: 'Payment',
   Plan: 'Plan',
   Subscription: 'Subscription',
   User: 'User',

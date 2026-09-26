@@ -6,4 +6,5 @@ model Plan {
     benefits String[]
     subscriptions Subscription[]
     rank Int
+    payments Payment[]
 }

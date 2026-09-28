@@ -2,6 +2,7 @@ import { prisma } from "../config/db.js";
 import bcrypt from "bcrypt";
 import { generate_jwt } from "../middlewares/authMiddleware.js";
 import { generateOtp, sendOtp, verifyOtp } from "../service/otpService.js";
+import cookie from "cookie-parser"
 
 export const register = async (req, res) => {
   try {

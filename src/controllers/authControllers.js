@@ -2,7 +2,7 @@ import { prisma } from "../config/db.js";
 import bcrypt from "bcrypt";
 import { generate_jwt } from "../middlewares/authMiddleware.js";
 import { generateOtp, sendOtp, verifyOtp } from "../service/otpService.js";
-import cookie from "cookie-parser"
+import cookie from "cookie-parser";
 
 export const register = async (req, res) => {
   try {
@@ -135,7 +135,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: "lax",
+      sameSite: "*",
     });
 
     return res.status(200).json({ token, message: "Login successful" });

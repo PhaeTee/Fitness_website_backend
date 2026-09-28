@@ -120,6 +120,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.MembershipCardScalarFieldEnum = {
+  id: 'id',
+  cardNumber: 'cardNumber',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -153,7 +160,11 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   password: 'password',
-  name: 'name'
+  name: 'name',
+  role: 'role',
+  otp: 'otp',
+  otpExpiresAt: 'otpExpiresAt',
+  isVerified: 'isVerified'
 };
 
 exports.Prisma.ProfileScalarFieldEnum = {
@@ -174,8 +185,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
 
 exports.Prisma.ModelName = {
+  MembershipCard: 'MembershipCard',
   Payment: 'Payment',
   Plan: 'Plan',
   Subscription: 'Subscription',

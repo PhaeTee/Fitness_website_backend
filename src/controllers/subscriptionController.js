@@ -65,14 +65,13 @@ export const getMySubscription = async (req, res) => {
       where: {
         userId: userId,
         status: "ACTIVE",
-         endDate: {
-      gt: new Date()
-         }
-
+        endDate: {
+          gt: new Date(),
+        },
       },
-      include:{
-        plan: true
-      }
+      include: {
+        plan: true,
+      },
     });
 
     if (!subscription) {
@@ -93,3 +92,32 @@ export const getMySubscription = async (req, res) => {
     });
   }
 };
+
+
+// subscription history
+export const subscriptionHistory = async (req, res )=>{
+  try{
+    const userId = req.user_id
+
+    const subscriptions = await prisma.subscription.findMany({
+      where:{
+        userId
+      },
+      orderBy:{
+        startDate: "desc"
+      }
+    })
+
+    return res.status(200).json({
+      message: "Subscription history retieved successfully",
+      data: subscriptions
+    })
+
+  }
+  catch(error){
+    return res.status(500).json({
+      message: "Failed to retieve subscription history"
+    })
+
+  }
+}

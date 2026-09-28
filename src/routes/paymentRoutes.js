@@ -17,7 +17,7 @@ export const paymentRoutes = express.Router();
  *     summary: Create a payment checkout
  *     tags: [Payments]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -120,7 +120,7 @@ paymentRoutes.post("/checkout", auth_middleware, checkout);
  *     summary: Verify a payment and activate the subscription
  *     tags: [Payments]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:

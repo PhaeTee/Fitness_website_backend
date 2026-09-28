@@ -76,7 +76,7 @@ export const checkout = async (req, res) => {
         action = "DOWNGRADE";
       }
     } else {
-      const previousSubscription = await prisma.subscription.findUnique({
+      const previousSubscription = await prisma.subscription.findFirst({
         where: {
           userId: userId,
         },

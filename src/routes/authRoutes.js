@@ -5,7 +5,9 @@ import {
   login,
   me,
   register,
+  verifyOtpController,
 } from "../controllers/authControllers.js";
+
 import { auth_middleware } from "../middlewares/authMiddleware.js";
 
 export const authRoutes = Router();
@@ -140,7 +142,7 @@ authRoutes.post("/login", login);
  *     summary: Get the authenticated user's information
  *     tags: [Authentication]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: User information retrieved successfully
@@ -180,7 +182,7 @@ authRoutes.get("/me", auth_middleware, me);
  *     summary: Change the authenticated user's password
  *     tags: [Authentication]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -214,3 +216,74 @@ authRoutes.get("/me", auth_middleware, me);
  */
 
 authRoutes.post("/change-password", auth_middleware, change_password);
+
+/**
+ * @swagger
+ * /auth/verify-otp:
+ *   post:
+ *     summary: Verify user email with OTP
+ *     description: Verifies a user's email address using the OTP sent during registration.
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - otp
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *               otp:
+ *                 type: string
+ *                 example: "123456"
+ *                 description: Six-digit verification code sent to the user's email.
+ *     responses:
+ *       200:
+ *         description: Email verified successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Email verified successfully
+ *       400:
+ *         description: Missing or invalid OTP
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid OTP
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: User not found
+ *       500:
+ *         description: Server error while verifying OTP
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Failed to verify OTP
+ */
+
+authRoutes.post("/verify-otp", verifyOtpController);

@@ -1,3 +1,12 @@
+model MembershipCard {
+  id         String   @id @default(uuid())
+  cardNumber String   @unique
+  userId     String   @unique
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
 model Payment {
   id        String   @id @default(uuid())
   userId    String
@@ -49,14 +58,24 @@ model Subscription {
   plan Plan @relation(fields: [planId], references: [id])
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
-  id            String         @id @default(uuid())
-  email         String         @unique
-  password      String
-  name          String
-  profile       Profile?
-  subscriptions Subscription[]
-  payments      Payment[]
+  id             String          @id @default(uuid())
+  email          String          @unique
+  password       String
+  name           String
+  role           Role            @default(USER)
+  otp            String?
+  otpExpiresAt   DateTime?
+  isVerified     Boolean         @default(false)
+  profile        Profile?
+  subscriptions  Subscription[]
+  payments       Payment[]
+  membershipCard MembershipCard?
 }
 
 model Profile {

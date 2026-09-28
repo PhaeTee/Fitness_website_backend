@@ -9,6 +9,10 @@ import { auth_middleware } from "./middlewares/authMiddleware.js";
 import { planRoutes } from "./routes/planRoutes.js";
 import { subscriptionRoutes } from "./routes/subscriptionRoutes.js";
 import { paymentRoutes } from "./routes/paymentRoutes.js";
+import { membershipCardRoutes } from "./routes/membershipCardRoutes.js";
+import { adminRoutes } from "./routes/adminRoutes.js";
+
+
 
 export const app = express();
 
@@ -43,3 +47,5 @@ app.use("/plans", planRoutes);
 app.use("/subscriptions", subscriptionRoutes);
 
 app.use("/payments", paymentRoutes);
+app.use("/membership-card", membershipCardRoutes);
+app.use("/admin", adminRoutes);

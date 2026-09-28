@@ -1,7 +1,7 @@
 import { prisma } from "../config/db.js";
 import bcrypt from "bcrypt";
 import { generate_jwt } from "../middlewares/authMiddleware.js";
-import { messenger } from "../config/email.js";
+import { generateOtp, sendOtp, verifyOtp } from "../service/otpService.js";
 
 export const register = async (req, res) => {
   try {
@@ -21,29 +21,84 @@ export const register = async (req, res) => {
     // hash the password
     const hashed_password = await bcrypt.hash(password, 5);
 
-    // save user to db
-    const user = await prisma.user.create({
-      data: { name, email, password: hashed_password },
+    // send otp
+    const otp = generateOtp();
+
+    const expiresAt = new Date(Date.now() + 600000);
+
+    // save to db
+
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashed_password,
+        otp,
+        otpExpiresAt: expiresAt,
+      },
     });
 
     // send otp
-    messenger.sendMail(
-      {
-        to: email,
-        subject: "User Registration",
-        text: `hello ${name}, your account has been registered successfully`,
-      },
-      (err, info) => console.log("email status:", info),
-    );
+    await sendOtp(email, otp);
 
-    // console.log("email sent");
-
-    // return successful
-    // return res.sendStatus(201);
-    return res.status(201).json({ message: "created", data: user });
+    return res.status(201).json({
+      message: "Please verify your email.",
+    });
   } catch (error) {
     console.log("[/register] error: ", error.message);
     return res.sendStatus(500);
+  }
+};
+
+export const verifyOtpController = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        message: "Email and OTP are required",
+      });
+    }
+
+    // Find the user
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Check the OTP
+    const result = verifyOtp(user.otp, otp, user.otpExpiresAt);
+
+    if (!result.success) {
+      return res.status(400).json({
+        message: result.message,
+      });
+    }
+
+    // Mark the user as verified
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        isVerified: true,
+        otp: null,
+        otpExpiresAt: null,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Email verified successfully",
+    });
+  } catch (error) {
+    console.log("[/verify-otp] error:", error.message);
+
+    return res.status(500).json({
+      message: "Failed to verify OTP",
+    });
   }
 };
 
@@ -79,9 +134,10 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: "lax"
-    })
-    return res.status(200).json({ token, message:"Login successful" });
+      sameSite: "lax",
+    });
+
+    return res.status(200).json({ token, message: "Login successful" });
   } catch (error) {
     console.log("[/login] error: ", error.message);
     return res.sendStatus(500);

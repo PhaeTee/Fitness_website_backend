@@ -3,6 +3,7 @@ import { auth_middleware } from "../middlewares/authMiddleware.js";
 import {
   // createSubscription,
   getMySubscription,
+  subscriptionHistory,
 } from "../controllers/subscriptionController.js";
 
 export const subscriptionRoutes = express.Router();
@@ -16,7 +17,7 @@ export const subscriptionRoutes = express.Router();
  *     summary: Get the authenticated user's active subscription
  *     tags: [Subscriptions]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Active subscription retrieved successfully
@@ -102,3 +103,61 @@ export const subscriptionRoutes = express.Router();
  */
 
 subscriptionRoutes.get("/me", auth_middleware, getMySubscription);
+
+
+/**
+ * @swagger
+ * /subscriptions/history:
+ *   get:
+ *     summary: Get the user's subscription history
+ *     tags:
+ *       - Subscriptions
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Subscription history retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Subscription history retrieved successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         format: uuid
+ *                         example: 76899af1-542a-4b03-80c2-42e37573a51c
+ *                       userId:
+ *                         type: string
+ *                         format: uuid
+ *                         example: 302f7dec-efba-48f5-b415-0afbf26e9798
+ *                       planId:
+ *                         type: string
+ *                         format: uuid
+ *                         example: 69596089-3af4-45bc-ac15-bd7be293b791
+ *                       startDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: 2026-09-25T01:39:57.066Z
+ *                       endDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: 2026-10-25T01:39:57.066Z
+ *                       status:
+ *                         type: string
+ *                         example: EXPIRED
+ *       401:
+ *         description: Authentication required
+ *       500:
+ *         description: Failed to retrieve subscription history
+ */
+
+
+subscriptionRoutes.get("/history", auth_middleware, subscriptionHistory)

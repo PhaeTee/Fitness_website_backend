@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
+
 export const generate_jwt = async (payload) => {
   const jwt_secret = process.env.JWT_SECRET;
   const token = jwt.sign(payload, jwt_secret);

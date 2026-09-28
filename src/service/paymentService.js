@@ -1,4 +1,5 @@
 import { prisma } from "../config/db.js";
+import crypto from "crypto"
 
 export const finalizePayment = async (paymentId) => {
   return await prisma.$transaction(async (tx) => {
@@ -96,6 +97,21 @@ export const finalizePayment = async (paymentId) => {
         status: "ACTIVE",
       },
     });
+
+    const existingCard = await tx.membershipCard.findUnique({
+        where: {
+            userId: payment.userId
+        }
+    })
+
+    if(!existingCard){
+        await tx.membershipCard.create({
+            data: {
+                userId: payment.userId,
+                cardNumber: `GYM-${crypto.randomUUID().slice(0,8).toUpperCase()}`
+            }
+        })
+    }
 
     //  Return the result
     return {

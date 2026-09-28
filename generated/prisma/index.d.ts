@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model MembershipCard
+ * 
+ */
+export type MembershipCard = $Result.DefaultSelection<Prisma.$MembershipCardPayload>
+/**
  * Model Payment
  * 
  */
@@ -40,6 +45,23 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Role: {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+}
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -48,8 +70,8 @@ export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Payments
- * const payments = await prisma.payment.findMany()
+ * // Fetch zero or more MembershipCards
+ * const membershipCards = await prisma.membershipCard.findMany()
  * ```
  *
  *
@@ -71,8 +93,8 @@ export class PrismaClient<
    * const prisma = new PrismaClient({
    *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
    * })
-   * // Fetch zero or more Payments
-   * const payments = await prisma.payment.findMany()
+   * // Fetch zero or more MembershipCards
+   * const membershipCards = await prisma.membershipCard.findMany()
    * ```
    *
    *
@@ -161,6 +183,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.membershipCard`: Exposes CRUD operations for the **MembershipCard** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MembershipCards
+    * const membershipCards = await prisma.membershipCard.findMany()
+    * ```
+    */
+  get membershipCard(): Prisma.MembershipCardDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.payment`: Exposes CRUD operations for the **Payment** model.
     * Example usage:
     * ```ts
@@ -656,6 +688,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    MembershipCard: 'MembershipCard',
     Payment: 'Payment',
     Plan: 'Plan',
     Subscription: 'Subscription',
@@ -676,10 +709,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "payment" | "plan" | "subscription" | "user" | "profile"
+      modelProps: "membershipCard" | "payment" | "plan" | "subscription" | "user" | "profile"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      MembershipCard: {
+        payload: Prisma.$MembershipCardPayload<ExtArgs>
+        fields: Prisma.MembershipCardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MembershipCardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MembershipCardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          findFirst: {
+            args: Prisma.MembershipCardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MembershipCardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          findMany: {
+            args: Prisma.MembershipCardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>[]
+          }
+          create: {
+            args: Prisma.MembershipCardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          createMany: {
+            args: Prisma.MembershipCardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MembershipCardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>[]
+          }
+          delete: {
+            args: Prisma.MembershipCardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          update: {
+            args: Prisma.MembershipCardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          deleteMany: {
+            args: Prisma.MembershipCardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MembershipCardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MembershipCardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>[]
+          }
+          upsert: {
+            args: Prisma.MembershipCardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipCardPayload>
+          }
+          aggregate: {
+            args: Prisma.MembershipCardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMembershipCard>
+          }
+          groupBy: {
+            args: Prisma.MembershipCardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MembershipCardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MembershipCardCountArgs<ExtArgs>
+            result: $Utils.Optional<MembershipCardCountAggregateOutputType> | number
+          }
+        }
+      }
       Payment: {
         payload: Prisma.$PaymentPayload<ExtArgs>
         fields: Prisma.PaymentFieldRefs
@@ -1173,6 +1280,7 @@ export namespace Prisma {
     comments?: runtime.SqlCommenterPlugin[]
   }
   export type GlobalOmitConfig = {
+    membershipCard?: MembershipCardOmit
     payment?: PaymentOmit
     plan?: PlanOmit
     subscription?: SubscriptionOmit
@@ -1336,6 +1444,1056 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model MembershipCard
+   */
+
+  export type AggregateMembershipCard = {
+    _count: MembershipCardCountAggregateOutputType | null
+    _min: MembershipCardMinAggregateOutputType | null
+    _max: MembershipCardMaxAggregateOutputType | null
+  }
+
+  export type MembershipCardMinAggregateOutputType = {
+    id: string | null
+    cardNumber: string | null
+    userId: string | null
+    createdAt: Date | null
+  }
+
+  export type MembershipCardMaxAggregateOutputType = {
+    id: string | null
+    cardNumber: string | null
+    userId: string | null
+    createdAt: Date | null
+  }
+
+  export type MembershipCardCountAggregateOutputType = {
+    id: number
+    cardNumber: number
+    userId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MembershipCardMinAggregateInputType = {
+    id?: true
+    cardNumber?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type MembershipCardMaxAggregateInputType = {
+    id?: true
+    cardNumber?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type MembershipCardCountAggregateInputType = {
+    id?: true
+    cardNumber?: true
+    userId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MembershipCardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MembershipCard to aggregate.
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MembershipCards to fetch.
+     */
+    orderBy?: MembershipCardOrderByWithRelationInput | MembershipCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MembershipCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MembershipCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MembershipCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MembershipCards
+    **/
+    _count?: true | MembershipCardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MembershipCardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MembershipCardMaxAggregateInputType
+  }
+
+  export type GetMembershipCardAggregateType<T extends MembershipCardAggregateArgs> = {
+        [P in keyof T & keyof AggregateMembershipCard]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMembershipCard[P]>
+      : GetScalarType<T[P], AggregateMembershipCard[P]>
+  }
+
+
+
+
+  export type MembershipCardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MembershipCardWhereInput
+    orderBy?: MembershipCardOrderByWithAggregationInput | MembershipCardOrderByWithAggregationInput[]
+    by: MembershipCardScalarFieldEnum[] | MembershipCardScalarFieldEnum
+    having?: MembershipCardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MembershipCardCountAggregateInputType | true
+    _min?: MembershipCardMinAggregateInputType
+    _max?: MembershipCardMaxAggregateInputType
+  }
+
+  export type MembershipCardGroupByOutputType = {
+    id: string
+    cardNumber: string
+    userId: string
+    createdAt: Date
+    _count: MembershipCardCountAggregateOutputType | null
+    _min: MembershipCardMinAggregateOutputType | null
+    _max: MembershipCardMaxAggregateOutputType | null
+  }
+
+  type GetMembershipCardGroupByPayload<T extends MembershipCardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MembershipCardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MembershipCardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MembershipCardGroupByOutputType[P]>
+            : GetScalarType<T[P], MembershipCardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MembershipCardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cardNumber?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membershipCard"]>
+
+  export type MembershipCardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cardNumber?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membershipCard"]>
+
+  export type MembershipCardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cardNumber?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membershipCard"]>
+
+  export type MembershipCardSelectScalar = {
+    id?: boolean
+    cardNumber?: boolean
+    userId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MembershipCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cardNumber" | "userId" | "createdAt", ExtArgs["result"]["membershipCard"]>
+  export type MembershipCardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MembershipCardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MembershipCardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MembershipCardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MembershipCard"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      cardNumber: string
+      userId: string
+      createdAt: Date
+    }, ExtArgs["result"]["membershipCard"]>
+    composites: {}
+  }
+
+  type MembershipCardGetPayload<S extends boolean | null | undefined | MembershipCardDefaultArgs> = $Result.GetResult<Prisma.$MembershipCardPayload, S>
+
+  type MembershipCardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MembershipCardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MembershipCardCountAggregateInputType | true
+    }
+
+  export interface MembershipCardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MembershipCard'], meta: { name: 'MembershipCard' } }
+    /**
+     * Find zero or one MembershipCard that matches the filter.
+     * @param {MembershipCardFindUniqueArgs} args - Arguments to find a MembershipCard
+     * @example
+     * // Get one MembershipCard
+     * const membershipCard = await prisma.membershipCard.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MembershipCardFindUniqueArgs>(args: SelectSubset<T, MembershipCardFindUniqueArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MembershipCard that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MembershipCardFindUniqueOrThrowArgs} args - Arguments to find a MembershipCard
+     * @example
+     * // Get one MembershipCard
+     * const membershipCard = await prisma.membershipCard.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MembershipCardFindUniqueOrThrowArgs>(args: SelectSubset<T, MembershipCardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MembershipCard that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardFindFirstArgs} args - Arguments to find a MembershipCard
+     * @example
+     * // Get one MembershipCard
+     * const membershipCard = await prisma.membershipCard.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MembershipCardFindFirstArgs>(args?: SelectSubset<T, MembershipCardFindFirstArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MembershipCard that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardFindFirstOrThrowArgs} args - Arguments to find a MembershipCard
+     * @example
+     * // Get one MembershipCard
+     * const membershipCard = await prisma.membershipCard.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MembershipCardFindFirstOrThrowArgs>(args?: SelectSubset<T, MembershipCardFindFirstOrThrowArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MembershipCards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MembershipCards
+     * const membershipCards = await prisma.membershipCard.findMany()
+     * 
+     * // Get first 10 MembershipCards
+     * const membershipCards = await prisma.membershipCard.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const membershipCardWithIdOnly = await prisma.membershipCard.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MembershipCardFindManyArgs>(args?: SelectSubset<T, MembershipCardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MembershipCard.
+     * @param {MembershipCardCreateArgs} args - Arguments to create a MembershipCard.
+     * @example
+     * // Create one MembershipCard
+     * const MembershipCard = await prisma.membershipCard.create({
+     *   data: {
+     *     // ... data to create a MembershipCard
+     *   }
+     * })
+     * 
+     */
+    create<T extends MembershipCardCreateArgs>(args: SelectSubset<T, MembershipCardCreateArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MembershipCards.
+     * @param {MembershipCardCreateManyArgs} args - Arguments to create many MembershipCards.
+     * @example
+     * // Create many MembershipCards
+     * const membershipCard = await prisma.membershipCard.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MembershipCardCreateManyArgs>(args?: SelectSubset<T, MembershipCardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MembershipCards and returns the data saved in the database.
+     * @param {MembershipCardCreateManyAndReturnArgs} args - Arguments to create many MembershipCards.
+     * @example
+     * // Create many MembershipCards
+     * const membershipCard = await prisma.membershipCard.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MembershipCards and only return the `id`
+     * const membershipCardWithIdOnly = await prisma.membershipCard.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MembershipCardCreateManyAndReturnArgs>(args?: SelectSubset<T, MembershipCardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MembershipCard.
+     * @param {MembershipCardDeleteArgs} args - Arguments to delete one MembershipCard.
+     * @example
+     * // Delete one MembershipCard
+     * const MembershipCard = await prisma.membershipCard.delete({
+     *   where: {
+     *     // ... filter to delete one MembershipCard
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MembershipCardDeleteArgs>(args: SelectSubset<T, MembershipCardDeleteArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MembershipCard.
+     * @param {MembershipCardUpdateArgs} args - Arguments to update one MembershipCard.
+     * @example
+     * // Update one MembershipCard
+     * const membershipCard = await prisma.membershipCard.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MembershipCardUpdateArgs>(args: SelectSubset<T, MembershipCardUpdateArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MembershipCards.
+     * @param {MembershipCardDeleteManyArgs} args - Arguments to filter MembershipCards to delete.
+     * @example
+     * // Delete a few MembershipCards
+     * const { count } = await prisma.membershipCard.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MembershipCardDeleteManyArgs>(args?: SelectSubset<T, MembershipCardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MembershipCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MembershipCards
+     * const membershipCard = await prisma.membershipCard.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MembershipCardUpdateManyArgs>(args: SelectSubset<T, MembershipCardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MembershipCards and returns the data updated in the database.
+     * @param {MembershipCardUpdateManyAndReturnArgs} args - Arguments to update many MembershipCards.
+     * @example
+     * // Update many MembershipCards
+     * const membershipCard = await prisma.membershipCard.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MembershipCards and only return the `id`
+     * const membershipCardWithIdOnly = await prisma.membershipCard.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MembershipCardUpdateManyAndReturnArgs>(args: SelectSubset<T, MembershipCardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MembershipCard.
+     * @param {MembershipCardUpsertArgs} args - Arguments to update or create a MembershipCard.
+     * @example
+     * // Update or create a MembershipCard
+     * const membershipCard = await prisma.membershipCard.upsert({
+     *   create: {
+     *     // ... data to create a MembershipCard
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MembershipCard we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MembershipCardUpsertArgs>(args: SelectSubset<T, MembershipCardUpsertArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MembershipCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardCountArgs} args - Arguments to filter MembershipCards to count.
+     * @example
+     * // Count the number of MembershipCards
+     * const count = await prisma.membershipCard.count({
+     *   where: {
+     *     // ... the filter for the MembershipCards we want to count
+     *   }
+     * })
+    **/
+    count<T extends MembershipCardCountArgs>(
+      args?: Subset<T, MembershipCardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MembershipCardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MembershipCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MembershipCardAggregateArgs>(args: Subset<T, MembershipCardAggregateArgs>): Prisma.PrismaPromise<GetMembershipCardAggregateType<T>>
+
+    /**
+     * Group by MembershipCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MembershipCardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MembershipCardGroupByArgs['orderBy'] }
+        : { orderBy?: MembershipCardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MembershipCardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMembershipCardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MembershipCard model
+   */
+  readonly fields: MembershipCardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MembershipCard.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MembershipCardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MembershipCard model
+   */
+  interface MembershipCardFieldRefs {
+    readonly id: FieldRef<"MembershipCard", 'String'>
+    readonly cardNumber: FieldRef<"MembershipCard", 'String'>
+    readonly userId: FieldRef<"MembershipCard", 'String'>
+    readonly createdAt: FieldRef<"MembershipCard", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MembershipCard findUnique
+   */
+  export type MembershipCardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter, which MembershipCard to fetch.
+     */
+    where: MembershipCardWhereUniqueInput
+  }
+
+  /**
+   * MembershipCard findUniqueOrThrow
+   */
+  export type MembershipCardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter, which MembershipCard to fetch.
+     */
+    where: MembershipCardWhereUniqueInput
+  }
+
+  /**
+   * MembershipCard findFirst
+   */
+  export type MembershipCardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter, which MembershipCard to fetch.
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MembershipCards to fetch.
+     */
+    orderBy?: MembershipCardOrderByWithRelationInput | MembershipCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MembershipCards.
+     */
+    cursor?: MembershipCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MembershipCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MembershipCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MembershipCards.
+     */
+    distinct?: MembershipCardScalarFieldEnum | MembershipCardScalarFieldEnum[]
+  }
+
+  /**
+   * MembershipCard findFirstOrThrow
+   */
+  export type MembershipCardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter, which MembershipCard to fetch.
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MembershipCards to fetch.
+     */
+    orderBy?: MembershipCardOrderByWithRelationInput | MembershipCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MembershipCards.
+     */
+    cursor?: MembershipCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MembershipCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MembershipCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MembershipCards.
+     */
+    distinct?: MembershipCardScalarFieldEnum | MembershipCardScalarFieldEnum[]
+  }
+
+  /**
+   * MembershipCard findMany
+   */
+  export type MembershipCardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter, which MembershipCards to fetch.
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MembershipCards to fetch.
+     */
+    orderBy?: MembershipCardOrderByWithRelationInput | MembershipCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MembershipCards.
+     */
+    cursor?: MembershipCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MembershipCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MembershipCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MembershipCards.
+     */
+    distinct?: MembershipCardScalarFieldEnum | MembershipCardScalarFieldEnum[]
+  }
+
+  /**
+   * MembershipCard create
+   */
+  export type MembershipCardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MembershipCard.
+     */
+    data: XOR<MembershipCardCreateInput, MembershipCardUncheckedCreateInput>
+  }
+
+  /**
+   * MembershipCard createMany
+   */
+  export type MembershipCardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MembershipCards.
+     */
+    data: MembershipCardCreateManyInput | MembershipCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MembershipCard createManyAndReturn
+   */
+  export type MembershipCardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * The data used to create many MembershipCards.
+     */
+    data: MembershipCardCreateManyInput | MembershipCardCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MembershipCard update
+   */
+  export type MembershipCardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MembershipCard.
+     */
+    data: XOR<MembershipCardUpdateInput, MembershipCardUncheckedUpdateInput>
+    /**
+     * Choose, which MembershipCard to update.
+     */
+    where: MembershipCardWhereUniqueInput
+  }
+
+  /**
+   * MembershipCard updateMany
+   */
+  export type MembershipCardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MembershipCards.
+     */
+    data: XOR<MembershipCardUpdateManyMutationInput, MembershipCardUncheckedUpdateManyInput>
+    /**
+     * Filter which MembershipCards to update
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * Limit how many MembershipCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MembershipCard updateManyAndReturn
+   */
+  export type MembershipCardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * The data used to update MembershipCards.
+     */
+    data: XOR<MembershipCardUpdateManyMutationInput, MembershipCardUncheckedUpdateManyInput>
+    /**
+     * Filter which MembershipCards to update
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * Limit how many MembershipCards to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MembershipCard upsert
+   */
+  export type MembershipCardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MembershipCard to update in case it exists.
+     */
+    where: MembershipCardWhereUniqueInput
+    /**
+     * In case the MembershipCard found by the `where` argument doesn't exist, create a new MembershipCard with this data.
+     */
+    create: XOR<MembershipCardCreateInput, MembershipCardUncheckedCreateInput>
+    /**
+     * In case the MembershipCard was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MembershipCardUpdateInput, MembershipCardUncheckedUpdateInput>
+  }
+
+  /**
+   * MembershipCard delete
+   */
+  export type MembershipCardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    /**
+     * Filter which MembershipCard to delete.
+     */
+    where: MembershipCardWhereUniqueInput
+  }
+
+  /**
+   * MembershipCard deleteMany
+   */
+  export type MembershipCardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MembershipCards to delete
+     */
+    where?: MembershipCardWhereInput
+    /**
+     * Limit how many MembershipCards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MembershipCard without action
+   */
+  export type MembershipCardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Payment
@@ -4734,6 +5892,10 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    role: $Enums.Role | null
+    otp: string | null
+    otpExpiresAt: Date | null
+    isVerified: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4741,6 +5903,10 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    role: $Enums.Role | null
+    otp: string | null
+    otpExpiresAt: Date | null
+    isVerified: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4748,6 +5914,10 @@ export namespace Prisma {
     email: number
     password: number
     name: number
+    role: number
+    otp: number
+    otpExpiresAt: number
+    isVerified: number
     _all: number
   }
 
@@ -4757,6 +5927,10 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
+    otp?: true
+    otpExpiresAt?: true
+    isVerified?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4764,6 +5938,10 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
+    otp?: true
+    otpExpiresAt?: true
+    isVerified?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4771,6 +5949,10 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
+    otp?: true
+    otpExpiresAt?: true
+    isVerified?: true
     _all?: true
   }
 
@@ -4851,6 +6033,10 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role: $Enums.Role
+    otp: string | null
+    otpExpiresAt: Date | null
+    isVerified: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -4875,9 +6061,14 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
+    isVerified?: boolean
     profile?: boolean | User$profileArgs<ExtArgs>
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
+    membershipCard?: boolean | User$membershipCardArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4886,6 +6077,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
+    isVerified?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4893,6 +6088,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
+    isVerified?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -4900,13 +6099,18 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
+    isVerified?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "otp" | "otpExpiresAt" | "isVerified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | User$profileArgs<ExtArgs>
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
+    membershipCard?: boolean | User$membershipCardArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4918,12 +6122,17 @@ export namespace Prisma {
       profile: Prisma.$ProfilePayload<ExtArgs> | null
       subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
+      membershipCard: Prisma.$MembershipCardPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
       password: string
       name: string
+      role: $Enums.Role
+      otp: string | null
+      otpExpiresAt: Date | null
+      isVerified: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5321,6 +6530,7 @@ export namespace Prisma {
     profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subscriptions<T extends User$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    membershipCard<T extends User$membershipCardArgs<ExtArgs> = {}>(args?: Subset<T, User$membershipCardArgs<ExtArgs>>): Prisma__MembershipCardClient<$Result.GetResult<Prisma.$MembershipCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5354,6 +6564,10 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'Role'>
+    readonly otp: FieldRef<"User", 'String'>
+    readonly otpExpiresAt: FieldRef<"User", 'DateTime'>
+    readonly isVerified: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -5811,6 +7025,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * User.membershipCard
+   */
+  export type User$membershipCardArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MembershipCard
+     */
+    select?: MembershipCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MembershipCard
+     */
+    omit?: MembershipCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipCardInclude<ExtArgs> | null
+    where?: MembershipCardWhereInput
   }
 
   /**
@@ -6909,6 +8142,16 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const MembershipCardScalarFieldEnum: {
+    id: 'id',
+    cardNumber: 'cardNumber',
+    userId: 'userId',
+    createdAt: 'createdAt'
+  };
+
+  export type MembershipCardScalarFieldEnum = (typeof MembershipCardScalarFieldEnum)[keyof typeof MembershipCardScalarFieldEnum]
+
+
   export const PaymentScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -6951,7 +8194,11 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     password: 'password',
-    name: 'name'
+    name: 'name',
+    role: 'role',
+    otp: 'otp',
+    otpExpiresAt: 'otpExpiresAt',
+    isVerified: 'isVerified'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -6984,6 +8231,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -7004,6 +8259,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7018,16 +8287,23 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Role'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
     
 
 
   /**
-   * Reference to a field of type 'DateTime[]'
+   * Reference to a field of type 'Role[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7047,6 +8323,56 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type MembershipCardWhereInput = {
+    AND?: MembershipCardWhereInput | MembershipCardWhereInput[]
+    OR?: MembershipCardWhereInput[]
+    NOT?: MembershipCardWhereInput | MembershipCardWhereInput[]
+    id?: StringFilter<"MembershipCard"> | string
+    cardNumber?: StringFilter<"MembershipCard"> | string
+    userId?: StringFilter<"MembershipCard"> | string
+    createdAt?: DateTimeFilter<"MembershipCard"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MembershipCardOrderByWithRelationInput = {
+    id?: SortOrder
+    cardNumber?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MembershipCardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    cardNumber?: string
+    userId?: string
+    AND?: MembershipCardWhereInput | MembershipCardWhereInput[]
+    OR?: MembershipCardWhereInput[]
+    NOT?: MembershipCardWhereInput | MembershipCardWhereInput[]
+    createdAt?: DateTimeFilter<"MembershipCard"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "cardNumber" | "userId">
+
+  export type MembershipCardOrderByWithAggregationInput = {
+    id?: SortOrder
+    cardNumber?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    _count?: MembershipCardCountOrderByAggregateInput
+    _max?: MembershipCardMaxOrderByAggregateInput
+    _min?: MembershipCardMinOrderByAggregateInput
+  }
+
+  export type MembershipCardScalarWhereWithAggregatesInput = {
+    AND?: MembershipCardScalarWhereWithAggregatesInput | MembershipCardScalarWhereWithAggregatesInput[]
+    OR?: MembershipCardScalarWhereWithAggregatesInput[]
+    NOT?: MembershipCardScalarWhereWithAggregatesInput | MembershipCardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MembershipCard"> | string
+    cardNumber?: StringWithAggregatesFilter<"MembershipCard"> | string
+    userId?: StringWithAggregatesFilter<"MembershipCard"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MembershipCard"> | Date | string
+  }
 
   export type PaymentWhereInput = {
     AND?: PaymentWhereInput | PaymentWhereInput[]
@@ -7259,9 +8585,14 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isVerified?: BoolFilter<"User"> | boolean
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
     payments?: PaymentListRelationFilter
+    membershipCard?: XOR<MembershipCardNullableScalarRelationFilter, MembershipCardWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7269,9 +8600,14 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpiresAt?: SortOrderInput | SortOrder
+    isVerified?: SortOrder
     profile?: ProfileOrderByWithRelationInput
     subscriptions?: SubscriptionOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
+    membershipCard?: MembershipCardOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7282,9 +8618,14 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isVerified?: BoolFilter<"User"> | boolean
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
     payments?: PaymentListRelationFilter
+    membershipCard?: XOR<MembershipCardNullableScalarRelationFilter, MembershipCardWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7292,6 +8633,10 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpiresAt?: SortOrderInput | SortOrder
+    isVerified?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -7305,6 +8650,10 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
+    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    otp?: StringNullableWithAggregatesFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type ProfileWhereInput = {
@@ -7360,6 +8709,54 @@ export namespace Prisma {
     country?: StringWithAggregatesFilter<"Profile"> | string
     state?: StringWithAggregatesFilter<"Profile"> | string
     userId?: StringWithAggregatesFilter<"Profile"> | string
+  }
+
+  export type MembershipCardCreateInput = {
+    id?: string
+    cardNumber: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutMembershipCardInput
+  }
+
+  export type MembershipCardUncheckedCreateInput = {
+    id?: string
+    cardNumber: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type MembershipCardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembershipCardNestedInput
+  }
+
+  export type MembershipCardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipCardCreateManyInput = {
+    id?: string
+    cardNumber: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type MembershipCardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipCardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentCreateInput = {
@@ -7574,9 +8971,14 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7584,9 +8986,14 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7594,9 +9001,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7604,9 +9016,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7614,6 +9031,10 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -7621,6 +9042,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -7628,6 +9053,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProfileCreateInput = {
@@ -7700,17 +9129,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7725,6 +9143,70 @@ export namespace Prisma {
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type MembershipCardCountOrderByAggregateInput = {
+    id?: SortOrder
+    cardNumber?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MembershipCardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    cardNumber?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MembershipCardMinOrderByAggregateInput = {
+    id?: SortOrder
+    cardNumber?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type PlanScalarRelationFilter = {
@@ -7773,24 +9255,6 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7805,20 +9269,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -7913,9 +9363,57 @@ export namespace Prisma {
     status?: SortOrder
   }
 
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ProfileNullableScalarRelationFilter = {
     is?: ProfileWhereInput | null
     isNot?: ProfileWhereInput | null
+  }
+
+  export type MembershipCardNullableScalarRelationFilter = {
+    is?: MembershipCardWhereInput | null
+    isNot?: MembershipCardWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -7923,6 +9421,10 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
+    isVerified?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -7930,6 +9432,10 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
+    isVerified?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -7937,6 +9443,60 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
+    isVerified?: SortOrder
+  }
+
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ProfileCountOrderByAggregateInput = {
@@ -7963,6 +9523,28 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type UserCreateNestedOneWithoutMembershipCardInput = {
+    create?: XOR<UserCreateWithoutMembershipCardInput, UserUncheckedCreateWithoutMembershipCardInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipCardInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type UserUpdateOneRequiredWithoutMembershipCardNestedInput = {
+    create?: XOR<UserCreateWithoutMembershipCardInput, UserUncheckedCreateWithoutMembershipCardInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipCardInput
+    upsert?: UserUpsertWithoutMembershipCardInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMembershipCardInput, UserUpdateWithoutMembershipCardInput>, UserUncheckedUpdateWithoutMembershipCardInput>
+  }
+
   export type UserCreateNestedOneWithoutPaymentsInput = {
     create?: XOR<UserCreateWithoutPaymentsInput, UserUncheckedCreateWithoutPaymentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentsInput
@@ -7975,20 +9557,12 @@ export namespace Prisma {
     connect?: PlanWhereUniqueInput
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
@@ -8148,6 +9722,12 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
+  export type MembershipCardCreateNestedOneWithoutUserInput = {
+    create?: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MembershipCardCreateOrConnectWithoutUserInput
+    connect?: MembershipCardWhereUniqueInput
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -8166,6 +9746,28 @@ export namespace Prisma {
     connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
     createMany?: PaymentCreateManyUserInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type MembershipCardUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MembershipCardCreateOrConnectWithoutUserInput
+    connect?: MembershipCardWhereUniqueInput
+  }
+
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type ProfileUpdateOneWithoutUserNestedInput = {
@@ -8206,6 +9808,16 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type MembershipCardUpdateOneWithoutUserNestedInput = {
+    create?: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MembershipCardCreateOrConnectWithoutUserInput
+    upsert?: MembershipCardUpsertWithoutUserInput
+    disconnect?: MembershipCardWhereInput | boolean
+    delete?: MembershipCardWhereInput | boolean
+    connect?: MembershipCardWhereUniqueInput
+    update?: XOR<XOR<MembershipCardUpdateToOneWithWhereWithoutUserInput, MembershipCardUpdateWithoutUserInput>, MembershipCardUncheckedUpdateWithoutUserInput>
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -8244,6 +9856,16 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type MembershipCardUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MembershipCardCreateOrConnectWithoutUserInput
+    upsert?: MembershipCardUpsertWithoutUserInput
+    disconnect?: MembershipCardWhereInput | boolean
+    delete?: MembershipCardWhereInput | boolean
+    connect?: MembershipCardWhereUniqueInput
+    update?: XOR<XOR<MembershipCardUpdateToOneWithWhereWithoutUserInput, MembershipCardUpdateWithoutUserInput>, MembershipCardUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserCreateNestedOneWithoutProfileInput = {
     create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutProfileInput
@@ -8270,17 +9892,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -8311,6 +9922,31 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8338,18 +9974,173 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type UserCreateWithoutMembershipCardInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMembershipCardInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMembershipCardInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMembershipCardInput, UserUncheckedCreateWithoutMembershipCardInput>
+  }
+
+  export type UserUpsertWithoutMembershipCardInput = {
+    update: XOR<UserUpdateWithoutMembershipCardInput, UserUncheckedUpdateWithoutMembershipCardInput>
+    create: XOR<UserCreateWithoutMembershipCardInput, UserUncheckedCreateWithoutMembershipCardInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMembershipCardInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMembershipCardInput, UserUncheckedUpdateWithoutMembershipCardInput>
+  }
+
+  export type UserUpdateWithoutMembershipCardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMembershipCardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -8357,8 +10148,13 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -8366,8 +10162,13 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -8416,8 +10217,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -8425,8 +10231,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type PlanUpsertWithoutPaymentsInput = {
@@ -8579,8 +10390,13 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -8588,8 +10404,13 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -8638,8 +10459,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -8647,8 +10473,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type PlanUpsertWithoutSubscriptionsInput = {
@@ -8757,6 +10588,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MembershipCardCreateWithoutUserInput = {
+    id?: string
+    cardNumber: string
+    createdAt?: Date | string
+  }
+
+  export type MembershipCardUncheckedCreateWithoutUserInput = {
+    id?: string
+    cardNumber: string
+    createdAt?: Date | string
+  }
+
+  export type MembershipCardCreateOrConnectWithoutUserInput = {
+    where: MembershipCardWhereUniqueInput
+    create: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+  }
+
   export type ProfileUpsertWithoutUserInput = {
     update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
     create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
@@ -8814,13 +10662,41 @@ export namespace Prisma {
     data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type MembershipCardUpsertWithoutUserInput = {
+    update: XOR<MembershipCardUpdateWithoutUserInput, MembershipCardUncheckedUpdateWithoutUserInput>
+    create: XOR<MembershipCardCreateWithoutUserInput, MembershipCardUncheckedCreateWithoutUserInput>
+    where?: MembershipCardWhereInput
+  }
+
+  export type MembershipCardUpdateToOneWithWhereWithoutUserInput = {
+    where?: MembershipCardWhereInput
+    data: XOR<MembershipCardUpdateWithoutUserInput, MembershipCardUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MembershipCardUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipCardUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutProfileInput = {
     id?: string
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -8828,8 +10704,13 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    isVerified?: boolean
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    membershipCard?: MembershipCardUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -8853,8 +10734,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -8862,8 +10748,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    membershipCard?: MembershipCardUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type SubscriptionCreateManyPlanInput = {

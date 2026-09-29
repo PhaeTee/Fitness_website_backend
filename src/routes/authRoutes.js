@@ -6,6 +6,7 @@ import {
   me,
   register,
   verifyOtpController,
+  resendOtpController,
 } from "../controllers/authControllers.js";
 
 import { auth_middleware } from "../middlewares/authMiddleware.js";

@@ -108,7 +108,7 @@ export const finalizePayment = async (paymentId) => {
         await tx.membershipCard.create({
             data: {
                 userId: payment.userId,
-                cardNumber: `GYM-${crypto.randomUUID().slice(0,8).toUpperCase()}`
+                accessId: `GYM-${crypto.randomUUID().slice(0,8).toUpperCase()}`
             }
         })
     }

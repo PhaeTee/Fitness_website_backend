@@ -28,7 +28,7 @@ export const membershipCardRoutes = express.Router();
  *                 data:
  *                   type: object
  *                   properties:
- *                     cardNumber:
+ *                     accessId:
  *                       type: string
  *                       example: GYM-A1B2C3D4
  *                     name:

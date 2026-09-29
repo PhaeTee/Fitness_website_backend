@@ -86,7 +86,7 @@ adminRoutes.get("/dashboard", getDashboard);
 
 adminRoutes.get("/members", getMembers);
 
-adminRoutes.get("/members/:cardNumber", getMember);
+adminRoutes.get("/members/:accessId", getMember);
 
 
 /**
@@ -105,9 +105,9 @@ adminRoutes.get("/members/:cardNumber", getMember);
  *           schema:
  *             type: object
  *             required:
- *               - cardNumber
+ *               - accessId
  *             properties:
- *               cardNumber:
+ *               accessId:
  *                 type: string
  *                 example: GYM-A1B2C3D4
  *     responses:

@@ -2,11 +2,11 @@ import { prisma } from "../config/db.js";
 
 export const verifyMembership = async (req, res) => {
   try {
-    const { cardNumber } = req.params;
+    const { accessId } = req.params;
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        cardNumber,
+        accessId,
       },
       include: {
         user: true,
@@ -36,7 +36,7 @@ export const verifyMembership = async (req, res) => {
       return res.status(200).json({
         message: "Membership is not active",
         data: {
-          cardNumber: card.cardNumber,
+          accessId: card.accessId,
           name: card.user.name,
           membershipStatus: "EXPIRED",
         },
@@ -46,7 +46,7 @@ export const verifyMembership = async (req, res) => {
     return res.status(200).json({
       message: "Membership verified successfully",
       data: {
-        cardNumber: card.cardNumber,
+        accessId: card.accessId,
         name: card.user.name,
         plan: subscription.plan.name,
         membershipStatus: "ACTIVE",

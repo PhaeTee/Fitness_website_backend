@@ -23,7 +23,7 @@ export const getMembers = async (req, res) => {
         email: true,
         membershipCard: {
           select: {
-            cardNumber: true,
+            accessId: true,
           },
         },
         subscriptions: {
@@ -53,11 +53,11 @@ export const getMembers = async (req, res) => {
 
 export const getMember = async (req, res) => {
   try {
-    const { cardNumber } = req.params;
+    const { accessId } = req.params;
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        cardNumber,
+        accessId,
       },
       include: {
         user: {
@@ -162,9 +162,9 @@ export const getDashboard = async (req, res) => {
 
 export const verifyMembership = async (req, res) => {
   try {
-    const { cardNumber } = req.body;
+    const { accessId } = req.body;
 
-    if (!cardNumber) {
+    if (!accessId) {
       return res.status(400).json({
         message: "Card number is required",
       });
@@ -172,7 +172,7 @@ export const verifyMembership = async (req, res) => {
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        cardNumber,
+        accessId,
       },
       include: {
         user: {
@@ -210,7 +210,7 @@ export const verifyMembership = async (req, res) => {
       return res.status(200).json({
         message: "Membership is not active",
         data: {
-          cardNumber: card.cardNumber,
+          accessId: card.accessId,
           name: card.user.name,
           membershipStatus: "EXPIRED",
         },
@@ -220,7 +220,7 @@ export const verifyMembership = async (req, res) => {
     return res.status(200).json({
       message: "Membership verified successfully",
       data: {
-        cardNumber: card.cardNumber,
+        accessId: card.accessId,
         name: card.user.name,
         email: card.user.email,
         plan: subscription.plan.name,

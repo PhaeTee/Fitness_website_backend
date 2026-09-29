@@ -37,7 +37,7 @@ export const getMyMembershipCard = async (req, res) => {
       return res.status(200).json({
         message: "Membership card retrieved successfully",
         data: {
-          cardNumber: card.cardNumber,
+          accessId: card.accessId,
           membershipStatus: "EXPIRED",
         },
       });
@@ -46,7 +46,7 @@ export const getMyMembershipCard = async (req, res) => {
     return res.status(200).json({
       message: "Membership card retrieved successfully",
       data: {
-        cardNumber: card.cardNumber,
+        accessId: card.accessId,
         name: req.user_name,
         plan: subscription.plan.name,
         status: subscription.status,
@@ -59,11 +59,11 @@ export const getMyMembershipCard = async (req, res) => {
 
 export const getMember = async (req, res) => {
   try {
-    const { cardNumber } = req.params;
+    const { accessId } = req.params;
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        cardNumber,
+       accessId,
       },
       include: {
         user: {

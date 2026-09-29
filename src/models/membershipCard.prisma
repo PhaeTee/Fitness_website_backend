@@ -1,6 +1,6 @@
 model MembershipCard{
     id String @id @default(uuid())
-    cardNumber String @unique
+    accessId String @unique
     userId String @unique
     createdAt DateTime @default(now())
 

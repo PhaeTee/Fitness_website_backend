@@ -12,6 +12,7 @@ model User {
     otp String?
     otpExpiresAt DateTime?
     isVerified Boolean @default(false)
+    
     profile Profile?
     subscriptions Subscription[]
     payments Payment[]

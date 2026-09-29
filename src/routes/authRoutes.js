@@ -287,3 +287,5 @@ authRoutes.post("/change-password", auth_middleware, change_password);
  */
 
 authRoutes.post("/verify-otp", verifyOtpController);
+
+authRoutes.post("/resend-otp", resendOtpController);

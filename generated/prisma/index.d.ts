@@ -1457,21 +1457,21 @@ export namespace Prisma {
 
   export type MembershipCardMinAggregateOutputType = {
     id: string | null
-    cardNumber: string | null
+    accessId: string | null
     userId: string | null
     createdAt: Date | null
   }
 
   export type MembershipCardMaxAggregateOutputType = {
     id: string | null
-    cardNumber: string | null
+    accessId: string | null
     userId: string | null
     createdAt: Date | null
   }
 
   export type MembershipCardCountAggregateOutputType = {
     id: number
-    cardNumber: number
+    accessId: number
     userId: number
     createdAt: number
     _all: number
@@ -1480,21 +1480,21 @@ export namespace Prisma {
 
   export type MembershipCardMinAggregateInputType = {
     id?: true
-    cardNumber?: true
+    accessId?: true
     userId?: true
     createdAt?: true
   }
 
   export type MembershipCardMaxAggregateInputType = {
     id?: true
-    cardNumber?: true
+    accessId?: true
     userId?: true
     createdAt?: true
   }
 
   export type MembershipCardCountAggregateInputType = {
     id?: true
-    cardNumber?: true
+    accessId?: true
     userId?: true
     createdAt?: true
     _all?: true
@@ -1574,7 +1574,7 @@ export namespace Prisma {
 
   export type MembershipCardGroupByOutputType = {
     id: string
-    cardNumber: string
+    accessId: string
     userId: string
     createdAt: Date
     _count: MembershipCardCountAggregateOutputType | null
@@ -1598,7 +1598,7 @@ export namespace Prisma {
 
   export type MembershipCardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cardNumber?: boolean
+    accessId?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -1606,7 +1606,7 @@ export namespace Prisma {
 
   export type MembershipCardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cardNumber?: boolean
+    accessId?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -1614,7 +1614,7 @@ export namespace Prisma {
 
   export type MembershipCardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cardNumber?: boolean
+    accessId?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -1622,12 +1622,12 @@ export namespace Prisma {
 
   export type MembershipCardSelectScalar = {
     id?: boolean
-    cardNumber?: boolean
+    accessId?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type MembershipCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cardNumber" | "userId" | "createdAt", ExtArgs["result"]["membershipCard"]>
+  export type MembershipCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accessId" | "userId" | "createdAt", ExtArgs["result"]["membershipCard"]>
   export type MembershipCardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -1645,7 +1645,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      cardNumber: string
+      accessId: string
       userId: string
       createdAt: Date
     }, ExtArgs["result"]["membershipCard"]>
@@ -2073,7 +2073,7 @@ export namespace Prisma {
    */
   interface MembershipCardFieldRefs {
     readonly id: FieldRef<"MembershipCard", 'String'>
-    readonly cardNumber: FieldRef<"MembershipCard", 'String'>
+    readonly accessId: FieldRef<"MembershipCard", 'String'>
     readonly userId: FieldRef<"MembershipCard", 'String'>
     readonly createdAt: FieldRef<"MembershipCard", 'DateTime'>
   }
@@ -8144,7 +8144,7 @@ export namespace Prisma {
 
   export const MembershipCardScalarFieldEnum: {
     id: 'id',
-    cardNumber: 'cardNumber',
+    accessId: 'accessId',
     userId: 'userId',
     createdAt: 'createdAt'
   };
@@ -8329,7 +8329,7 @@ export namespace Prisma {
     OR?: MembershipCardWhereInput[]
     NOT?: MembershipCardWhereInput | MembershipCardWhereInput[]
     id?: StringFilter<"MembershipCard"> | string
-    cardNumber?: StringFilter<"MembershipCard"> | string
+    accessId?: StringFilter<"MembershipCard"> | string
     userId?: StringFilter<"MembershipCard"> | string
     createdAt?: DateTimeFilter<"MembershipCard"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -8337,7 +8337,7 @@ export namespace Prisma {
 
   export type MembershipCardOrderByWithRelationInput = {
     id?: SortOrder
-    cardNumber?: SortOrder
+    accessId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -8345,18 +8345,18 @@ export namespace Prisma {
 
   export type MembershipCardWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    cardNumber?: string
+    accessId?: string
     userId?: string
     AND?: MembershipCardWhereInput | MembershipCardWhereInput[]
     OR?: MembershipCardWhereInput[]
     NOT?: MembershipCardWhereInput | MembershipCardWhereInput[]
     createdAt?: DateTimeFilter<"MembershipCard"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "cardNumber" | "userId">
+  }, "id" | "accessId" | "userId">
 
   export type MembershipCardOrderByWithAggregationInput = {
     id?: SortOrder
-    cardNumber?: SortOrder
+    accessId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     _count?: MembershipCardCountOrderByAggregateInput
@@ -8369,7 +8369,7 @@ export namespace Prisma {
     OR?: MembershipCardScalarWhereWithAggregatesInput[]
     NOT?: MembershipCardScalarWhereWithAggregatesInput | MembershipCardScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MembershipCard"> | string
-    cardNumber?: StringWithAggregatesFilter<"MembershipCard"> | string
+    accessId?: StringWithAggregatesFilter<"MembershipCard"> | string
     userId?: StringWithAggregatesFilter<"MembershipCard"> | string
     createdAt?: DateTimeWithAggregatesFilter<"MembershipCard"> | Date | string
   }
@@ -8713,48 +8713,48 @@ export namespace Prisma {
 
   export type MembershipCardCreateInput = {
     id?: string
-    cardNumber: string
+    accessId: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutMembershipCardInput
   }
 
   export type MembershipCardUncheckedCreateInput = {
     id?: string
-    cardNumber: string
+    accessId: string
     userId: string
     createdAt?: Date | string
   }
 
   export type MembershipCardUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMembershipCardNestedInput
   }
 
   export type MembershipCardUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MembershipCardCreateManyInput = {
     id?: string
-    cardNumber: string
+    accessId: string
     userId: string
     createdAt?: Date | string
   }
 
   export type MembershipCardUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MembershipCardUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9147,21 +9147,21 @@ export namespace Prisma {
 
   export type MembershipCardCountOrderByAggregateInput = {
     id?: SortOrder
-    cardNumber?: SortOrder
+    accessId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MembershipCardMaxOrderByAggregateInput = {
     id?: SortOrder
-    cardNumber?: SortOrder
+    accessId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MembershipCardMinOrderByAggregateInput = {
     id?: SortOrder
-    cardNumber?: SortOrder
+    accessId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -10590,13 +10590,13 @@ export namespace Prisma {
 
   export type MembershipCardCreateWithoutUserInput = {
     id?: string
-    cardNumber: string
+    accessId: string
     createdAt?: Date | string
   }
 
   export type MembershipCardUncheckedCreateWithoutUserInput = {
     id?: string
-    cardNumber: string
+    accessId: string
     createdAt?: Date | string
   }
 
@@ -10675,13 +10675,13 @@ export namespace Prisma {
 
   export type MembershipCardUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MembershipCardUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: StringFieldUpdateOperationsInput | string
+    accessId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

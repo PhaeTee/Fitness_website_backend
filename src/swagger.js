@@ -5,7 +5,7 @@ const options = {
     openapi: "3.0.0",
 
     info: {
-      title: "getFit API",
+      title: "FitZone API",
       version: "1.0.0",
       description: "API documentation for the getFit fitness website",
     },

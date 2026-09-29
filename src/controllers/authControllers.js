@@ -5,8 +5,13 @@ import { generateOtp, sendOtp, verifyOtp } from "../service/otpService.js";
 
 export const register = async (req, res) => {
   try {
+    console.log("1. Register started");
+
     // get values from user form
     const { name, email, password } = req.body;
+
+    console.log("2. Request data received:", { name, email });
+
     if (!name || !email || !password) {
       return res
         .status(400)
@@ -14,7 +19,12 @@ export const register = async (req, res) => {
     }
 
     // check if user already exist
-    const exist_user = await prisma.user.findUnique({ where: { email } });
+    const exist_user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    console.log("3. User check completed");
+
     if (exist_user) {
       return res.status(400).json({
         message: "User already exists",
@@ -24,16 +34,21 @@ export const register = async (req, res) => {
     // hash the password
     const hashed_password = await bcrypt.hash(password, 5);
 
-    // send otp
+    console.log("4. Password hashed");
+
+    // generate OTP
     const otp = generateOtp();
+
+    console.log("5. OTP generated");
 
     const expiresAt = new Date(Date.now() + 600000);
 
-    // save to db
-
+    // check verification table
     const unverified_user = await prisma.verification.findUnique({
       where: { email },
     });
+
+    console.log("6. Verification check completed");
 
     if (unverified_user) {
       await prisma.verification.update({
@@ -45,6 +60,8 @@ export const register = async (req, res) => {
           otpExpiresAt: expiresAt,
         },
       });
+
+      console.log("7. Existing verification updated");
     } else {
       await prisma.verification.create({
         data: {
@@ -55,15 +72,23 @@ export const register = async (req, res) => {
           otpExpiresAt: expiresAt,
         },
       });
+
+      console.log("7. New verification created");
     }
-    // send otp
+
+    console.log("8. About to send OTP");
+
+    // send OTP
     await sendOtp(email, otp);
+
+    console.log("9. OTP sent successfully");
 
     return res.status(201).json({
       message: "Please verify your email.",
     });
   } catch (error) {
-    console.log("[/register] error: ", error.message);
+    console.error("[/register] FULL ERROR:", error);
+
     return res.sendStatus(500);
   }
 };

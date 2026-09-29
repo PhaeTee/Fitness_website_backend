@@ -11,9 +11,7 @@ console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
 console.log("=======================");
 
 export const messenger = createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false,
+  service:"gmail",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,

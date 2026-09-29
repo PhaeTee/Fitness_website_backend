@@ -1,11 +1,13 @@
 import "dotenv/config";
-import { createTransport } from "nodemailer";
+// import { createTransport } from "nodemailer";
+
+import nodemailer from "nodemailer";
 
 import dns from "node:dns";
 
 dns.setDefaultResultOrder("ipv4first");
 
-export const messenger = createTransport({
+export const messenger = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,

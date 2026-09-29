@@ -2,8 +2,14 @@ import "dotenv/config";
 import { createTransport } from "nodemailer";
 
 console.log(process.env["EMAIL_USER"]);
+console.log("SMTP HOST:", process.env.SMTP_HOST);
+console.log("SMTP PORT:", process.env.SMTP_PORT);
+console.log("EMAIL USER:", process.env.EMAIL_USER);
+console.log("EMAIL PASS exists:", !!process.env.EMAIL_PASS);
 
 export const messenger = createTransport({
+
+
   host: process.env["SMTP_HOST"],
   port: Number(process.env["SMTP_PORT"]),
   secure: false,

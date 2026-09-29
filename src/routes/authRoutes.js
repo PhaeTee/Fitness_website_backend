@@ -289,4 +289,71 @@ authRoutes.post("/change-password", auth_middleware, change_password);
 
 authRoutes.post("/verify-otp", verifyOtpController);
 
+/**
+ * @swagger
+ * /auth/resend-otp:
+ *   post:
+ *     summary: Resend email verification OTP
+ *     description: Generates a new OTP and sends it to the user's email address. The user must not already be verified.
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: A new verification code has been sent
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: A new verification code has been sent
+ *
+ *       400:
+ *         description: Email is missing or already verified
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Email is required
+ *
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: User not found
+ *
+ *       500:
+ *         description: Failed to resend OTP
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Failed to resend OTP
+ */
+
 authRoutes.post("/resend-otp", resendOtpController);

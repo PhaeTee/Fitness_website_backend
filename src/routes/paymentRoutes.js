@@ -3,7 +3,7 @@ import express from "express";
 import {
   checkout,
   verifyPayment,
-  paymentWebhook,
+ 
 } from "../controllers/paymentControllers.js";
 
 import { auth_middleware } from "../middlewares/authMiddleware.js";
@@ -312,4 +312,4 @@ paymentRoutes.post("/verify", auth_middleware, verifyPayment);
  *                   example: Webhook processing failed
  */
 
-paymentRoutes.post("/webhook", paymentWebhook);
+// paymentRoutes.post("/webhook", paymentWebhook);

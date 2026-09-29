@@ -275,116 +275,116 @@ export const verifyPayment = async (req, res) => {
 };
 
 // webhook controller
-export const paymentWebhook = async (req, res) => {
-  try {
-    // Get fw signature
-    const signature = req.headers["flutterwave-signature"];
+// export const paymentWebhook = async (req, res) => {
+//   try {
+//     // Get fw signature
+//     const signature = req.headers["flutterwave-signature"];
 
-    // Make sure a signature was provided
-    if (!signature) {
-      return res.status(401).json({
-        message: "Missing webhook signature",
-      });
-    }
+//     // Make sure a signature was provided
+//     if (!signature) {
+//       return res.status(401).json({
+//         message: "Missing webhook signature",
+//       });
+//     }
 
-    //  Verify that the webhook came from Flutterwave
-    const expectedSignature = crypto
-      .createHmac("sha256", process.env.FLW_SECRET_HASH)
-      .update(req.rawBody)
-      .digest("base64");
+//     //  Verify that the webhook came from Flutterwave
+//     const expectedSignature = crypto
+//       .createHmac("sha256", process.env.FLW_SECRET_HASH)
+//       .update(req.rawBody)
+//       .digest("base64");
 
-    if (signature !== expectedSignature) {
-      return res.status(401).json({
-        message: "Invalid webhook signature",
-      });
-    }
+//     if (signature !== expectedSignature) {
+//       return res.status(401).json({
+//         message: "Invalid webhook signature",
+//       });
+//     }
 
-    //  Get the webhook information
-    const { event, data } = req.body;
+//     //  Get the webhook information
+//     const { event, data } = req.body;
 
-    console.log("Flutterwave webhook:", event);
+//     console.log("Flutterwave webhook:", event);
 
-    if (event !== "charge.completed") {
-      return res.sendStatus(200);
-    }
+//     if (event !== "charge.completed") {
+//       return res.sendStatus(200);
+//     }
 
-    //  Make sure the webhook contains a transaction ID
-    if (!data?.id) {
-      return res.status(400).json({
-        message: "Transaction ID missing",
-      });
-    }
+//     //  Make sure the webhook contains a transaction ID
+//     if (!data?.id) {
+//       return res.status(400).json({
+//         message: "Transaction ID missing",
+//       });
+//     }
 
-    //  Find our payment using Flutterwave's transaction reference
-    const payment = await prisma.payment.findUnique({
-      where: {
-        reference: data.tx_ref,
-      },
-    });
+//     //  Find our payment using Flutterwave's transaction reference
+//     const payment = await prisma.payment.findUnique({
+//       where: {
+//         reference: data.tx_ref,
+//       },
+//     });
 
-    if (!payment) {
-      return res.status(404).json({
-        message: "Payment not found",
-      });
-    }
+//     if (!payment) {
+//       return res.status(404).json({
+//         message: "Payment not found",
+//       });
+//     }
 
-    // Ignore duplicate webhook notifications
-    if (payment.status === "SUCCESS") {
-      return res.sendStatus(200);
-    }
+//     // Ignore duplicate webhook notifications
+//     if (payment.status === "SUCCESS") {
+//       return res.sendStatus(200);
+//     }
 
-    //  Verify the transaction directly with Flutterwave
-    const verificationResponse = await axios.get(
-      `https://api.flutterwave.com/v3/transactions/${data.id}/verify`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
-          "Content-Type": "application/json",
-        },
-      },
-    );
+//     //  Verify the transaction directly with Flutterwave
+//     const verificationResponse = await axios.get(
+//       `https://api.flutterwave.com/v3/transactions/${data.id}/verify`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+//           "Content-Type": "application/json",
+//         },
+//       },
+//     );
 
-    const transaction = verificationResponse.data.data;
+//     const transaction = verificationResponse.data.data;
 
-    if (transaction.status !== "successful") {
-      await prisma.payment.update({
-        where: {
-          id: payment.id,
-        },
-        data: {
-          status: "FAILED",
-        },
-      });
+//     if (transaction.status !== "successful") {
+//       await prisma.payment.update({
+//         where: {
+//           id: payment.id,
+//         },
+//         data: {
+//           status: "FAILED",
+//         },
+//       });
 
-      return res.sendStatus(200);
-    }
+//       return res.sendStatus(200);
+//     }
 
-    if (transaction.tx_ref !== payment.reference) {
-      return res.status(400).json({
-        message: "Payment reference mismatch",
-      });
-    }
+//     if (transaction.tx_ref !== payment.reference) {
+//       return res.status(400).json({
+//         message: "Payment reference mismatch",
+//       });
+//     }
 
-    if (Number(transaction.amount) !== payment.amount) {
-      return res.status(400).json({
-        message: "Payment amount mismatch",
-      });
-    }
+//     if (Number(transaction.amount) !== payment.amount) {
+//       return res.status(400).json({
+//         message: "Payment amount mismatch",
+//       });
+//     }
 
-    if (transaction.currency !== "NGN") {
-      return res.status(400).json({
-        message: "Payment currency mismatch",
-      });
-    }
+//     if (transaction.currency !== "NGN") {
+//       return res.status(400).json({
+//         message: "Payment currency mismatch",
+//       });
+//     }
 
-    await finalizePayment(payment.id);
+//     await finalizePayment(payment.id);
 
-    return res.sendStatus(200);
-  } catch (error) {
-    console.error(error.response?.data || error);
+//     return res.sendStatus(200);
+//   } catch (error) {
+//     console.error(error.response?.data || error);
 
-    return res.status(500).json({
-      message: "Webhook processing failed",
-    });
-  }
-};
+//     return res.status(500).json({
+//       message: "Webhook processing failed",
+//     });
+//   }
+// };

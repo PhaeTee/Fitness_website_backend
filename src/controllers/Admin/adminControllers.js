@@ -7,12 +7,15 @@ export const getMembers = async (req, res) => {
     let where = {};
 
     if (status === "active") {
+      
     }
 
     if (status === "expired") {
+      // expired condition
     }
 
     if (status === "no-membership") {
+      // no membership condition
     }
 
     const users = await prisma.user.findMany({
@@ -23,7 +26,7 @@ export const getMembers = async (req, res) => {
         email: true,
         membershipCard: {
           select: {
-            accessId: true,
+            cardNumber: true,
           },
         },
         subscriptions: {
@@ -53,11 +56,11 @@ export const getMembers = async (req, res) => {
 
 export const getMember = async (req, res) => {
   try {
-    const { accessId } = req.params;
+    const { cardNumber } = req.params;
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        accessId,
+        cardNumber,
       },
       include: {
         user: {
@@ -160,11 +163,13 @@ export const getDashboard = async (req, res) => {
   }
 };
 
+
+
 export const verifyMembership = async (req, res) => {
   try {
-    const { accessId } = req.body;
+    const { cardNumber } = req.body;
 
-    if (!accessId) {
+    if (!cardNumber) {
       return res.status(400).json({
         message: "Card number is required",
       });
@@ -172,7 +177,7 @@ export const verifyMembership = async (req, res) => {
 
     const card = await prisma.membershipCard.findUnique({
       where: {
-        accessId,
+        cardNumber,
       },
       include: {
         user: {
@@ -210,7 +215,7 @@ export const verifyMembership = async (req, res) => {
       return res.status(200).json({
         message: "Membership is not active",
         data: {
-          accessId: card.accessId,
+          cardNumber: card.cardNumber,
           name: card.user.name,
           membershipStatus: "EXPIRED",
         },
@@ -220,7 +225,7 @@ export const verifyMembership = async (req, res) => {
     return res.status(200).json({
       message: "Membership verified successfully",
       data: {
-        accessId: card.accessId,
+        cardNumber: card.cardNumber,
         name: card.user.name,
         email: card.user.email,
         plan: subscription.plan.name,

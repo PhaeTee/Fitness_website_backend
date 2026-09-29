@@ -16,13 +16,9 @@ export const register = async (req, res) => {
     // check if user already exist
     const exist_user = await prisma.user.findUnique({ where: { email } });
     if (exist_user) {
-      if (!exist_user.isVerified) {
-        return res.status(400).json({ message: "Email is not verified" });
-      } else {
-        return res.status(400).json({
-          message: "User already exists",
-        });
-      }
+      return res.status(400).json({
+        message: "User already exists",
+      });
     }
 
     // hash the password
@@ -35,16 +31,31 @@ export const register = async (req, res) => {
 
     // save to db
 
-    await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashed_password,
-        otp,
-        otpExpiresAt: expiresAt,
-      },
+    const unverified_user = await prisma.verification.findUnique({
+      where: { email },
     });
 
+    if (unverified_user) {
+      await prisma.verification.update({
+        where: { email },
+        data: {
+          name,
+          password: hashed_password,
+          otp,
+          otpExpiresAt: expiresAt,
+        },
+      });
+    } else {
+      await prisma.verification.create({
+        data: {
+          name,
+          email,
+          password: hashed_password,
+          otp,
+          otpExpiresAt: expiresAt,
+        },
+      });
+    }
     // send otp
     await sendOtp(email, otp);
 
@@ -203,34 +214,42 @@ export const verifyOtpController = async (req, res) => {
       });
     }
 
-    // Find the user
-    const user = await prisma.user.findUnique({
+    // Find the pending veri
+    const unverified_user = await prisma.verification.findUnique({
       where: { email },
     });
 
-    if (!user) {
+    if (!unverified_user) {
       return res.status(404).json({
-        message: "User not found",
+        message: "verification request not found",
       });
     }
 
     // Check the OTP
-    const result = verifyOtp(user.otp, otp, user.otpExpiresAt);
+    const code = verifyOtp(
+      unverified_user.otp,
+      otp,
+      unverified_user.otpExpiresAt,
+    );
 
-    if (!result.success) {
+    if (!code.success) {
       return res.status(400).json({
-        message: result.message,
+        message: code.message,
       });
     }
 
-    // Mark the user as verified
-    await prisma.user.update({
-      where: { id: user.id },
+    // create
+    await prisma.user.create({
       data: {
+        name: unverified_user.name,
+        email: unverified_user.email,
+        password: unverified_user.password,
         isVerified: true,
-        otp: null,
-        otpExpiresAt: null,
       },
+    });
+
+    await prisma.verification.delete({
+      where: { email },
     });
 
     return res.status(200).json({
@@ -255,34 +274,36 @@ export const resendOtpController = async (req, res) => {
       });
     }
 
-    const user = await prisma.user.findUnique({
+    // Find the pending verification
+    const unverified_user = await prisma.verification.findUnique({
       where: { email },
     });
 
-    if (!user) {
+    if (!unverified_user) {
       return res.status(404).json({
-        message: "User not found",
+        message: "Verification request not found",
       });
     }
 
-    if (user.isVerified) {
-      return res.status(400).json({
-        message: "Email is already verified",
-      });
-    }
-
+    // Generate a new OTP
     const otp = generateOtp();
     const expiresAt = new Date(Date.now() + 600000);
 
-    await prisma.user.update({
-      where: { id: user.id },
+    // Update the OTP
+    await prisma.verification.update({
+      where: { email },
       data: {
         otp,
         otpExpiresAt: expiresAt,
       },
     });
 
+    console.log("2. OTP saved");
+
+    // Send the new OTP
     await sendOtp(email, otp);
+
+    console.log("3. OTP email sent");
 
     return res.status(200).json({
       message: "A new verification code has been sent",

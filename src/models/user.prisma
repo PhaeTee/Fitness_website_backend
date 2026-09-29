@@ -9,7 +9,6 @@ model User {
     password String 
     name String
     role Role @default(USER)
-    otp String?
     otpExpiresAt DateTime?
     isVerified Boolean @default(false)
     
@@ -17,6 +16,16 @@ model User {
     subscriptions Subscription[]
     payments Payment[]
     membershipCard MembershipCard?
+}
+
+model Verification {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  otp          String
+  otpExpiresAt DateTime
+  createdAt    DateTime @default(now())
 }
 
 

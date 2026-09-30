@@ -5984,7 +5984,6 @@ export namespace Prisma {
     password: string | null
     name: string | null
     role: $Enums.Role | null
-    otpExpiresAt: Date | null
     isVerified: boolean | null
   }
 
@@ -5994,7 +5993,6 @@ export namespace Prisma {
     password: string | null
     name: string | null
     role: $Enums.Role | null
-    otpExpiresAt: Date | null
     isVerified: boolean | null
   }
 
@@ -6004,7 +6002,6 @@ export namespace Prisma {
     password: number
     name: number
     role: number
-    otpExpiresAt: number
     isVerified: number
     _all: number
   }
@@ -6016,7 +6013,6 @@ export namespace Prisma {
     password?: true
     name?: true
     role?: true
-    otpExpiresAt?: true
     isVerified?: true
   }
 
@@ -6026,7 +6022,6 @@ export namespace Prisma {
     password?: true
     name?: true
     role?: true
-    otpExpiresAt?: true
     isVerified?: true
   }
 
@@ -6036,7 +6031,6 @@ export namespace Prisma {
     password?: true
     name?: true
     role?: true
-    otpExpiresAt?: true
     isVerified?: true
     _all?: true
   }
@@ -6119,7 +6113,6 @@ export namespace Prisma {
     password: string
     name: string
     role: $Enums.Role
-    otpExpiresAt: Date | null
     isVerified: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -6146,7 +6139,6 @@ export namespace Prisma {
     password?: boolean
     name?: boolean
     role?: boolean
-    otpExpiresAt?: boolean
     isVerified?: boolean
     profile?: boolean | User$profileArgs<ExtArgs>
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
@@ -6161,7 +6153,6 @@ export namespace Prisma {
     password?: boolean
     name?: boolean
     role?: boolean
-    otpExpiresAt?: boolean
     isVerified?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -6171,7 +6162,6 @@ export namespace Prisma {
     password?: boolean
     name?: boolean
     role?: boolean
-    otpExpiresAt?: boolean
     isVerified?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -6181,11 +6171,10 @@ export namespace Prisma {
     password?: boolean
     name?: boolean
     role?: boolean
-    otpExpiresAt?: boolean
     isVerified?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "otpExpiresAt" | "isVerified", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "isVerified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | User$profileArgs<ExtArgs>
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
@@ -6210,7 +6199,6 @@ export namespace Prisma {
       password: string
       name: string
       role: $Enums.Role
-      otpExpiresAt: Date | null
       isVerified: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -6644,7 +6632,6 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
-    readonly otpExpiresAt: FieldRef<"User", 'DateTime'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
   }
     
@@ -9300,7 +9287,6 @@ export namespace Prisma {
     password: 'password',
     name: 'name',
     role: 'role',
-    otpExpiresAt: 'otpExpiresAt',
     isVerified: 'isVerified'
   };
 
@@ -9345,14 +9331,6 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -9702,7 +9680,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
-    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
     isVerified?: BoolFilter<"User"> | boolean
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
@@ -9716,7 +9693,6 @@ export namespace Prisma {
     password?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    otpExpiresAt?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     profile?: ProfileOrderByWithRelationInput
     subscriptions?: SubscriptionOrderByRelationAggregateInput
@@ -9733,7 +9709,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
-    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
     isVerified?: BoolFilter<"User"> | boolean
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
@@ -9747,7 +9722,6 @@ export namespace Prisma {
     password?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    otpExpiresAt?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -9763,7 +9737,6 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
-    otpExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
@@ -10145,7 +10118,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
@@ -10159,7 +10131,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -10173,7 +10144,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
@@ -10187,7 +10157,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -10201,7 +10170,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
   }
 
@@ -10211,7 +10179,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -10221,7 +10188,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -10606,17 +10572,6 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -10632,18 +10587,12 @@ export namespace Prisma {
     isNot?: MembershipCardWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    otpExpiresAt?: SortOrder
     isVerified?: SortOrder
   }
 
@@ -10653,7 +10602,6 @@ export namespace Prisma {
     password?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    otpExpiresAt?: SortOrder
     isVerified?: SortOrder
   }
 
@@ -10663,7 +10611,6 @@ export namespace Prisma {
     password?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    otpExpiresAt?: SortOrder
     isVerified?: SortOrder
   }
 
@@ -10675,20 +10622,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -10988,10 +10921,6 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -11207,17 +11136,6 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -11231,31 +11149,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -11272,7 +11165,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
@@ -11285,7 +11177,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -11314,7 +11205,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
@@ -11327,7 +11217,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -11340,7 +11229,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
@@ -11353,7 +11241,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -11407,7 +11294,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
@@ -11420,7 +11306,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -11578,7 +11463,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileCreateNestedOneWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
@@ -11591,7 +11475,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -11645,7 +11528,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
@@ -11658,7 +11540,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -11874,7 +11755,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
@@ -11887,7 +11767,6 @@ export namespace Prisma {
     password: string
     name: string
     role?: $Enums.Role
-    otpExpiresAt?: Date | string | null
     isVerified?: boolean
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -11916,7 +11795,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
@@ -11929,7 +11807,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput

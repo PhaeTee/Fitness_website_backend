@@ -3,7 +3,6 @@ import { auth_middleware } from "../middlewares/authMiddleware.js";
 import { admin_middleware } from "../middlewares/adminMiddleware.js";
 import {
   getMembers,
-  getMember,
   getDashboard,
   verifyMembership,
 } from "../controllers/Admin/adminControllers.js";
@@ -11,7 +10,6 @@ export const adminRoutes = express.Router();
 
 adminRoutes.use(auth_middleware);
 adminRoutes.use(admin_middleware);
-
 
 /**
  * @swagger
@@ -56,11 +54,7 @@ adminRoutes.use(admin_middleware);
  *         description: Failed to retrieve dashboard
  */
 
-
-
-
 adminRoutes.get("/dashboard", getDashboard);
-
 
 /**
  * @swagger
@@ -82,12 +76,9 @@ adminRoutes.get("/dashboard", getDashboard);
  *         description: Failed to retrieve members
  */
 
-
-
 adminRoutes.get("/members", getMembers);
 
-adminRoutes.get("/members/:accessId", getMember);
-
+// adminRoutes.get("/members/:accessId", getMember);
 
 /**
  * @swagger
@@ -124,8 +115,5 @@ adminRoutes.get("/members/:accessId", getMember);
  *       500:
  *         description: Failed to retrieve membership details
  */
-
-
-
 
 adminRoutes.post("/verify-membership", verifyMembership);

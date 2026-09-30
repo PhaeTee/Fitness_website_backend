@@ -5,12 +5,8 @@ import { generateOtp, sendOtp, verifyOtp } from "../service/otpService.js";
 
 export const register = async (req, res) => {
   try {
-    console.log("1. Register started");
-
     // get values from user form
     const { name, email, password } = req.body;
-
-    console.log("2. Request data received:", { name, email });
 
     if (!name || !email || !password) {
       return res
@@ -23,8 +19,6 @@ export const register = async (req, res) => {
       where: { email },
     });
 
-    console.log("3. User check completed");
-
     if (exist_user) {
       return res.status(400).json({
         message: "User already exists",
@@ -33,8 +27,6 @@ export const register = async (req, res) => {
 
     // hash the password
     const hashed_password = await bcrypt.hash(password, 5);
-
-    console.log("4. Password hashed");
 
     // generate OTP
     const otp = generateOtp();
@@ -48,8 +40,6 @@ export const register = async (req, res) => {
       where: { email },
     });
 
-    console.log("6. Verification check completed");
-
     if (unverified_user) {
       await prisma.verification.update({
         where: { email },
@@ -60,8 +50,6 @@ export const register = async (req, res) => {
           otpExpiresAt: expiresAt,
         },
       });
-
-      console.log("7. Existing verification updated");
     } else {
       await prisma.verification.create({
         data: {
@@ -72,16 +60,10 @@ export const register = async (req, res) => {
           otpExpiresAt: expiresAt,
         },
       });
-
-      console.log("7. New verification created");
     }
-
-    console.log("8. About to send OTP");
 
     // send OTP
     await sendOtp(email, otp);
-
-    console.log("9. OTP sent successfully");
 
     return res.status(201).json({
       message: "Please verify your email.",
@@ -149,6 +131,7 @@ export const login = async (req, res) => {
 // auth user profile
 export const me = async (req, res) => {
   try {
+    // user_id is from jwt
     const user_id = req.user_id;
     console.log("user_id: ", user_id);
     const user = await prisma.user.findUnique({
@@ -323,12 +306,8 @@ export const resendOtpController = async (req, res) => {
       },
     });
 
-    console.log("2. OTP saved");
-
     // Send the new OTP
     await sendOtp(email, otp);
-
-    console.log("3. OTP email sent");
 
     return res.status(200).json({
       message: "A new verification code has been sent",

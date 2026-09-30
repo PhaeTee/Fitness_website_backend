@@ -6,16 +6,52 @@ export const getMembers = async (req, res) => {
 
     let where = {};
 
-    if (status === "active") {
-      
-    }
+    switch (status) {
+      case "active":
+        where = {
+          subscriptions: {
+            some: {
+              status: "ACTIVE",
+              endDate: {
+                gt: new Date(),
+              },
+            },
+          },
+        };
+        break;
 
-    if (status === "expired") {
-      // expired condition
-    }
+      case "expired":
+        where = {
+          subscriptions: {
+            some: {
+              endDate: {
+                lte: new Date(),
+              },
+            },
+          },
+          NOT: {
+            subscriptions: {
+              some: {
+                status: "ACTIVE",
+                endDate: {
+                  gt: new Date(),
+                },
+              },
+            },
+          },
+        };
+        break;
 
-    if (status === "no-membership") {
-      // no membership condition
+      case "no-membership":
+        where = {
+          subscriptions: {
+            none: {},
+          },
+        };
+        break;
+
+      default:
+        where = {};
     }
 
     const users = await prisma.user.findMany({
@@ -54,49 +90,49 @@ export const getMembers = async (req, res) => {
   }
 };
 
-export const getMember = async (req, res) => {
-  try {
-    const { cardNumber } = req.params;
+// export const getMember = async (req, res) => {
+//   try {
+//     const { cardNumber } = req.params;
 
-    const card = await prisma.membershipCard.findUnique({
-      where: {
-        cardNumber,
-      },
-      include: {
-        user: {
-          include: {
-            subscriptions: {
-              orderBy: {
-                startDate: "desc",
-              },
-              take: 1,
-              include: {
-                plan: true,
-              },
-            },
-          },
-        },
-      },
-    });
+//     const card = await prisma.membershipCard.findUnique({
+//       where: {
+//         cardNumber,
+//       },
+//       include: {
+//         user: {
+//           include: {
+//             subscriptions: {
+//               orderBy: {
+//                 startDate: "desc",
+//               },
+//               take: 1,
+//               include: {
+//                 plan: true,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
 
-    if (!card) {
-      return res.status(404).json({
-        message: "Member not found",
-      });
-    }
+//     if (!card) {
+//       return res.status(404).json({
+//         message: "Member not found",
+//       });
+//     }
 
-    return res.status(200).json({
-      message: "Member retrieved successfully",
-      data: card,
-    });
-  } catch (error) {
-    console.log(error);
+//     return res.status(200).json({
+//       message: "Member retrieved successfully",
+//       data: card,
+//     });
+//   } catch (error) {
+//     console.log(error);
 
-    return res.status(500).json({
-      message: "Failed to retrieve member",
-    });
-  }
-};
+//     return res.status(500).json({
+//       message: "Failed to retrieve member",
+//     });
+//   }
+// };
 
 export const getDashboard = async (req, res) => {
   try {

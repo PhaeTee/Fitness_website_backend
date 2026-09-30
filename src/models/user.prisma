@@ -9,7 +9,6 @@ model User {
     password String 
     name String
     role Role @default(USER)
-    otpExpiresAt DateTime?
     isVerified Boolean @default(false)
     
     profile Profile?

@@ -162,7 +162,6 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   name: 'name',
   role: 'role',
-  otpExpiresAt: 'otpExpiresAt',
   isVerified: 'isVerified'
 };
 
@@ -192,11 +191,6 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',

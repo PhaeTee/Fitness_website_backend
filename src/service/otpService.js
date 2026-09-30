@@ -5,12 +5,6 @@ export const generateOtp = () => {
 };
 
 export const sendOtp = async (email, otp) => {
-  console.log("===== BEFORE SEND MAIL =====");
-  console.log("SMTP HOST:", process.env.SMTP_HOST);
-  console.log("SMTP PORT:", process.env.SMTP_PORT);
-  console.log("EMAIL USER:", process.env.EMAIL_USER);
-  console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
-  console.log("============================");
 
   await messenger.sendMail({
     to: email,

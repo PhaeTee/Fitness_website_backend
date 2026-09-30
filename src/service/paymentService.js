@@ -10,8 +10,6 @@ export const finalizePayment = async (paymentId) => {
       },
     });
 
-    // find payment
-
     if (!payment) {
       throw new Error("Payment not found");
     }

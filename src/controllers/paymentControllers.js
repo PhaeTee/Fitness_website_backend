@@ -10,15 +10,11 @@ export const checkout = async (req, res) => {
     let action;
     const reference = crypto.randomUUID();
 
-    // check that plan was provided
-
     if (!planId) {
       return res.status(400).json({
         message: "Plan required",
       });
     }
-
-    // find the plan
 
     const plan = await prisma.plan.findUnique({
       where: {
@@ -32,7 +28,6 @@ export const checkout = async (req, res) => {
       });
     }
 
-    // find the user
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -161,7 +156,6 @@ export const verifyPayment = async (req, res) => {
     const { reference, transactionId } = req.body;
     const userId = req.user_id;
 
-    // check information are available
 
     if (!reference || !transactionId) {
       return res.status(400).json({
@@ -179,7 +173,6 @@ export const verifyPayment = async (req, res) => {
       return res.status(404).json({ message: "Payment not found" });
     }
 
-    //  check if payment belongs to the logged-in user
 
     if (payment.userId !== userId) {
       return res.status(403).json({
@@ -187,7 +180,7 @@ export const verifyPayment = async (req, res) => {
       });
     }
 
-    //  check if payment was already processed
+  
 
     if (payment.status === "SUCCESS") {
       return res.status(200).json({
@@ -220,7 +213,6 @@ export const verifyPayment = async (req, res) => {
 
     const transaction = verificationResponse.data.data;
 
-    // check if its successful
 
     if (transaction.status !== "successful") {
       await prisma.payment.update({
@@ -245,7 +237,7 @@ export const verifyPayment = async (req, res) => {
       });
     }
 
-    // check amt matches
+    
 
     if (Number(transaction.amount) !== payment.amount) {
       return res.status(400).json({
@@ -253,7 +245,7 @@ export const verifyPayment = async (req, res) => {
       });
     }
 
-    // ccheck currency
+    
 
     if (transaction.currency !== "NGN") {
       return res.status(400).json({
@@ -273,6 +265,10 @@ export const verifyPayment = async (req, res) => {
     });
   }
 };
+
+
+
+
 
 // webhook controller
 // export const paymentWebhook = async (req, res) => {
